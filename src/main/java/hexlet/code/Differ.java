@@ -22,9 +22,6 @@ public class Differ {
         Map<String, Object> json2
                 = objectMapper.readValue(Files.readString(file2.toPath().toAbsolutePath()), new TypeReference<TreeMap<String,Object>>(){});
 
-//        System.out.println(json1);
-//        System.out.println(json2);
-
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{").append("\n");
 
