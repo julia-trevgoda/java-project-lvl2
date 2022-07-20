@@ -34,17 +34,23 @@ test {
 }
 
 jacoco {
-    toolVersion = "0.8.7"
-    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+    applyTo run
 }
 
 jacocoTestReport {
     dependsOn test
     reports {
         xml.required = true
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
     }
 }
 
 testlogger {
     showStandardStreams true
+}
+
+tasks.register('applicationCodeCoverageReport', JacocoReport) {
+    executionData run
+    sourceSets sourceSets.main
 }
