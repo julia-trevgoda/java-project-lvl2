@@ -30,15 +30,14 @@ compileJava {
 
 test {
     useJUnitPlatform()
-    finalizedBy jacocoTestReport
 }
 
-jacoco {
-    applyTo run
-}
+//jacoco {
+//    applyTo run
+//}
 
 jacocoTestReport {
-    dependsOn test
+//    dependsOn test
     reports {
         xml.required = true
         csv.required = false
@@ -50,7 +49,7 @@ testlogger {
     showStandardStreams true
 }
 
-tasks.register('applicationCodeCoverageReport', JacocoReport) {
-    executionData run
-    sourceSets sourceSets.main
-}
+//tasks.register('applicationCodeCoverageReport', JacocoReport) {
+//    executionData run
+//    sourceSets sourceSets.main
+//}
