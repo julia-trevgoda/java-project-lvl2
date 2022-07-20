@@ -17,10 +17,12 @@ public class Differ {
         ObjectMapper objectMapper = new ObjectMapper();
 
         Map<String, Object> json1
-                = objectMapper.readValue(Files.readString(file1.toPath().toAbsolutePath()), new TypeReference<TreeMap<String,Object>>(){});
+                = objectMapper.readValue(Files.readString(file1.toPath().toAbsolutePath()),
+                new TypeReference<TreeMap<String, Object>>() { });
 
         Map<String, Object> json2
-                = objectMapper.readValue(Files.readString(file2.toPath().toAbsolutePath()), new TypeReference<TreeMap<String,Object>>(){});
+                = objectMapper.readValue(Files.readString(file2.toPath().toAbsolutePath()),
+                new TypeReference<TreeMap<String, Object>>() { });
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{").append("\n");
@@ -35,8 +37,8 @@ public class Differ {
         List<String> list2 = json2.keySet().stream().toList();
 
         while (iter1 < size1 && iter2 < size2) {
-            String key1 =  list1.get(iter1);
-            String key2 =  list2.get(iter2);
+            String key1 = list1.get(iter1);
+            String key2 = list2.get(iter2);
 
             if (key1.equals(key2)) {
                 if (json1.get(key1).equals(json2.get(key2))) {

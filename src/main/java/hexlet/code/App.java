@@ -20,7 +20,7 @@ public class App implements Callable<Void> {
             description = "output format [default: stylish]",
             defaultValue = "stylish"
     )
-    String format;
+    private String format;
 
     @CommandLine.Parameters(
             index = "0",
@@ -36,6 +36,11 @@ public class App implements Callable<Void> {
     )
     private File file2;
 
+    /**
+     * Diff.generate() method compares 2 files.
+     * @return String as a result of comparing
+     * @throws Exception when something goes wrong
+     */
     @Override
     public Void call() throws Exception {
 
