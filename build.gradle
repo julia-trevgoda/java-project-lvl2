@@ -21,7 +21,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
     implementation 'info.picocli:picocli:4.6.3'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
-    testImplementation 'junit:junit:4.13'
+    testImplementation 'junit:junit:4.13.2'
 
 }
 
@@ -32,6 +32,11 @@ compileJava {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
+
+    jacoco {
+        destinationFile = layout.buildDirectory.file('jacoco/jacocoTest.exec').get().asFile
+        classDumpDir = layout.buildDirectory.dir('jacoco/classpathdumps').get().asFile
+    }
 }
 
 //jacoco {
