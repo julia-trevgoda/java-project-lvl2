@@ -17,14 +17,15 @@ public class AppTests {
     void testdiffJson1() throws IOException {
         File file1 = new File("src/test/resources/testDiffJson1_1.json");
         File file2 = new File("src/test/resources/testDiffJson1_2.json");
-        String expectedResult = "{\n"
-                + "- follow: false\n"
-                + "  host: hexlet.io\n"
-                + "- proxy: 123.234.53.22\n"
-                + "- timeout: 50\n"
-                + "+ timeout: 20\n"
-                + "+ verbose: true\n"
-                + "}";
+        String expectedResult = """
+                {
+                - follow: false
+                  host: hexlet.io
+                - proxy: 123.234.53.22
+                - timeout: 50
+                + timeout: 20
+                + verbose: true
+                }""";
         String actualResult = Differ.generate(file1, file2);
         assertEquals(actualResult, expectedResult);
     }
@@ -44,14 +45,15 @@ public class AppTests {
     void testDiffJson2() throws IOException {
         File file1 = new File("src/test/resources/testDiffJson2_1.json");
         File file2 = new File("src/test/resources/testDiffJson2_2.json");
-        String expectedResult = "{\n"
-                + "+ follow: false\n"
-                + "  host: hexlet.io\n"
-                + "+ proxy: 123.234.53.22\n"
-                + "- timeout: 20\n"
-                + "+ timeout: 50\n"
-                + "- verbose: true\n"
-                + "}";
+        String expectedResult = """
+                {
+                + follow: false
+                  host: hexlet.io
+                + proxy: 123.234.53.22
+                - timeout: 20
+                + timeout: 50
+                - verbose: true
+                }""";
         String actualResult = Differ.generate(file1, file2);
         assertEquals(actualResult, expectedResult);
     }
@@ -61,11 +63,12 @@ public class AppTests {
     void testDiffJson3() throws IOException {
         File file1 = new File("src/test/resources/testDiffJson3_1.json");
         File file2 = new File("src/test/resources/testDiffJson3_2.json");
-        String expectedResult = "{\n"
-                + "- host: hexlet.io\n"
-                + "- timeout: 20\n"
-                + "- verbose: true\n"
-                + "}";
+        String expectedResult = """
+                {
+                - host: hexlet.io
+                - timeout: 20
+                - verbose: true
+                }""";
         String actualResult = Differ.generate(file1, file2);
         assertEquals(actualResult, expectedResult);
     }
@@ -75,11 +78,12 @@ public class AppTests {
     void testDiffJson4() throws IOException {
         File file1 = new File("src/test/resources/testDiffJson4_1.json");
         File file2 = new File("src/test/resources/testDiffJson4_2.json");
-        String expectedResult = "{\n"
-                + "+ host: hexlet.io\n"
-                + "+ timeout: 20\n"
-                + "+ verbose: true\n"
-                + "}";
+        String expectedResult = """
+                {
+                + host: hexlet.io
+                + timeout: 20
+                + verbose: true
+                }""";
         String actualResult = Differ.generate(file1, file2);
         assertEquals(actualResult, expectedResult);
     }
