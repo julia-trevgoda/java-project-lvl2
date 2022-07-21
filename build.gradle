@@ -31,6 +31,7 @@ compileJava {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
 
 //jacoco {
@@ -43,7 +44,7 @@ jacoco {
 }
 
 jacocoTestReport {
-    mustRunAfter test
+    dependsOn test
     reports {
         xml.required = true
         csv.required = false
