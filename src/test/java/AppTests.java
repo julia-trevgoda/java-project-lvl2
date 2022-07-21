@@ -32,7 +32,8 @@ public class AppTests {
     @DisplayName("parser of json files works correctly")
     void testParseJson() throws IOException {
         File file = new File("src/test/resources/testDiffJson1_1.json");
-        Map<String, Object> expectedResult = Map.of("follow", false, "host", "hexlet.io", "proxy", "123.234.53.22", "timeout", 50);
+        Map<String, Object> expectedResult = Map.of("follow", false, "host", "hexlet.io",
+                "proxy", "123.234.53.22", "timeout", 50);
         Map<String, Object> actualResult = Utils.parseJson(file);
         assertEquals(actualResult, expectedResult);
     }
