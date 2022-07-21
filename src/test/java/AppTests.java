@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Map;
 
 public class AppTests {
-    final int NON_MAGIC_NUM1 = 50 ;
+    final private int NON_MAGIC_NUM1 = 50;
 
     @Test
     @DisplayName("testDiffJson1: file1.size() > file2.size()")
