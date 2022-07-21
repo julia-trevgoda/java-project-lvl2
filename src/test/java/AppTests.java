@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Map;
 
 public class AppTests {
+    final int NON_MAGIC_NUM1 = 50 ;
 
     @Test
     @DisplayName("testDiffJson1: file1.size() > file2.size()")
@@ -33,7 +34,7 @@ public class AppTests {
     void testParseJson() throws IOException {
         File file = new File("src/test/resources/testDiffJson1_1.json");
         Map<String, Object> expectedResult = Map.of("follow", false, "host", "hexlet.io",
-                "proxy", "123.234.53.22", "timeout", 50);
+                "proxy", "123.234.53.22", "timeout", NON_MAGIC_NUM1);
         Map<String, Object> actualResult = Utils.parseJson(file);
         assertEquals(actualResult, expectedResult);
     }
