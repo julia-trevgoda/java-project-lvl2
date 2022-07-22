@@ -1,5 +1,5 @@
 import hexlet.code.Differ;
-import hexlet.code.Utils;
+import hexlet.code.Parser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -30,12 +30,12 @@ public class AppTests {
     }
 
     @Test
-    @DisplayName("parser of json files works correctly")
+    @DisplayName("json format parser files works correctly")
     void testParseJson() throws IOException {
         File file = new File("src/test/resources/testDiffJson1_1.json");
         Map<String, Object> expectedResult = Map.of("follow", false, "host", "hexlet.io",
                 "proxy", "123.234.53.22", "timeout", 50);
-        Map<String, Object> actualResult = Utils.parseJson(file);
+        Map<String, Object> actualResult = Parser.parseJson(file);
         assertEquals(actualResult, expectedResult);
     }
 
@@ -82,6 +82,57 @@ public class AppTests {
                 + host: hexlet.io
                 + timeout: 20
                 + verbose: true
+                }""";
+        String actualResult = Differ.generate(file1, file2);
+        assertEquals(actualResult, expectedResult);
+    }
+
+    @Test
+    @DisplayName("testDiffYml: yml format parser works correctly")
+    void testDiffYml() throws IOException {
+        File file1 = new File("src/test/resources/testDiffYaml1_1.yml");
+        File file2 = new File("src/test/resources/testDiffYaml1_2.yml");
+        String expectedResult = """
+                {
+                - follow_yml: false
+                  host: hexlet.io
+                - proxy: 123.234.53.22
+                - timeout: 50
+                + timeout: 20
+                + verbose: true
+                }""";
+        String actualResult = Differ.generate(file1, file2);
+        assertEquals(actualResult, expectedResult);
+    }
+
+    @Test
+    @DisplayName("testDiffYaml: yaml format parser works correctly")
+    void testDiffYaml() throws IOException {
+        File file1 = new File("src/test/resources/testDiffYaml2_1.yaml");
+        File file2 = new File("src/test/resources/testDiffYaml2_2.yaml");
+        String expectedResult = """
+                {
+                - follow_yaml: false
+                  host: hexlet.io
+                - proxy: 123.234.53.22
+                - timeout: 50
+                + timeout: 20
+                + verbose: true
+                }""";
+        String actualResult = Differ.generate(file1, file2);
+        assertEquals(actualResult, expectedResult);
+    }
+
+    @Test
+    @DisplayName("testDiffYml: file2 is empty")
+    void testDiffYml2() throws IOException {
+        File file1 = new File("src/test/resources/testDiffYaml3_1.yml");
+        File file2 = new File("src/test/resources/testDiffYaml3_2.yml");
+        String expectedResult = """
+                {
+                - host: hexlet.io
+                - timeout: 20
+                - verbose: true
                 }""";
         String actualResult = Differ.generate(file1, file2);
         assertEquals(actualResult, expectedResult);

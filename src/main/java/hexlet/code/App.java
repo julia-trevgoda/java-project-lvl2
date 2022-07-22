@@ -45,6 +45,7 @@ public class App implements Callable<Void> {
     public Void call() throws Exception {
 
         var diff = Differ.generate(file1, file2);
+
         System.out.println(diff);
         return null;
     }
