@@ -1,4 +1,5 @@
 import hexlet.code.Differ;
+import hexlet.code.Formatter;
 import hexlet.code.Parser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,7 @@ public class AppTests {
                 + timeout: 20
                 + verbose: true
                 }""";
-        String actualResult = Differ.generate(file1, file2);
+        String actualResult = Formatter.formatDiff("", Differ.generate(file1, file2));
         assertEquals(actualResult, expectedResult);
     }
 
@@ -53,7 +54,7 @@ public class AppTests {
                 + timeout: 50
                 - verbose: true
                 }""";
-        String actualResult = Differ.generate(file1, file2);
+        String actualResult = Formatter.formatDiff("stylish", Differ.generate(file1, file2));
         assertEquals(actualResult, expectedResult);
     }
 
@@ -68,7 +69,7 @@ public class AppTests {
                 - timeout: 20
                 - verbose: true
                 }""";
-        String actualResult = Differ.generate(file1, file2);
+        String actualResult = Formatter.formatDiff("", Differ.generate(file1, file2));
         assertEquals(actualResult, expectedResult);
     }
 
@@ -83,7 +84,7 @@ public class AppTests {
                 + timeout: 20
                 + verbose: true
                 }""";
-        String actualResult = Differ.generate(file1, file2);
+        String actualResult = Formatter.formatDiff("stylish", Differ.generate(file1, file2));
         assertEquals(actualResult, expectedResult);
     }
 
@@ -101,7 +102,7 @@ public class AppTests {
                 + timeout: 20
                 + verbose: true
                 }""";
-        String actualResult = Differ.generate(file1, file2);
+        String actualResult = Formatter.formatDiff("", Differ.generate(file1, file2));
         assertEquals(actualResult, expectedResult);
     }
 
@@ -119,7 +120,7 @@ public class AppTests {
                 + timeout: 20
                 + verbose: true
                 }""";
-        String actualResult = Differ.generate(file1, file2);
+        String actualResult = Formatter.formatDiff("", Differ.generate(file1, file2));
         assertEquals(actualResult, expectedResult);
     }
 
@@ -134,7 +135,7 @@ public class AppTests {
                 - timeout: 20
                 - verbose: true
                 }""";
-        String actualResult = Differ.generate(file1, file2);
+        String actualResult = Formatter.formatDiff("", Differ.generate(file1, file2));
         assertEquals(actualResult, expectedResult);
     }
 }
