@@ -5,8 +5,6 @@ import picocli.CommandLine;
 import java.io.File;
 import java.util.concurrent.Callable;
 
-import static hexlet.code.Formatter.formatDiff;
-
 
 @CommandLine.Command(
         name = "gendiff",
@@ -46,9 +44,8 @@ public class App implements Callable<Void> {
     @Override
     public Void call() throws Exception {
 
-        var diff = Differ.generate(file1, file2);
-        var formattedDiff = formatDiff(format, diff);
-        System.out.println(formattedDiff);
+        var diff = Differ.generate(file1, file2, format);
+        System.out.println(diff);
         return null;
     }
 

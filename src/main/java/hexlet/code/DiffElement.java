@@ -5,7 +5,9 @@ public class DiffElement {
     public enum DiffType {
         ADD,
         REMOVE,
-        EQUALS
+        EQUALS,
+        ADD_ONE,
+        REMOVE_ONE
     }
 
     private final String key;
