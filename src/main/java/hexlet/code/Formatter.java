@@ -51,7 +51,8 @@ public class Formatter {
         for (DiffElement diffElement : diff) {
 
             switch (diffElement.getParam()) {
-                case ADD_ONE -> output.append("Property ").append(diffElement.getKey()).append(" was added with value: ")
+                case ADD_ONE -> output.append("Property ").append(diffElement.getKey())
+                        .append(" was added with value: ")
                         .append(getPlainValue(diffElement.getValue())).append("\n");
                 case REMOVE_ONE -> output.append("Property ").append(diffElement.getKey()).append(" was removed")
                         .append("\n");
