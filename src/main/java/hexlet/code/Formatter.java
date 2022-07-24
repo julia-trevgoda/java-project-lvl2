@@ -37,6 +37,8 @@ public class Formatter {
                         .append(diffElement.getValue()).append("\n");
                 case EQUALS -> output.append("  ").append(diffElement.getKey()).append(": ")
                         .append(diffElement.getValue()).append("\n");
+                default -> {
+                }
             }
         }
 
@@ -56,6 +58,8 @@ public class Formatter {
                 case REMOVE -> output.append("Property ").append(diffElement.getKey()).append(" was updated. From ")
                         .append(getPlainValue(diffElement.getValue()));
                 case ADD -> output.append(" to ").append(getPlainValue(diffElement.getValue())).append("\n");
+                default -> {
+                }
             }
 
         }
