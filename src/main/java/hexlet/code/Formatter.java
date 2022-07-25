@@ -49,7 +49,6 @@ public class Formatter {
         StringBuilder output = new StringBuilder();
 
         for (DiffElement diffElement : diff) {
-
             switch (diffElement.getParam()) {
                 case ADD_ONE -> output.append("Property ").append(diffElement.getKey())
                         .append(" was added with value: ")
@@ -70,7 +69,6 @@ public class Formatter {
     public static String formatJson(List<DiffElement> diff) throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        System.out.println(objectMapper.writeValueAsString(diff));
         return objectMapper.writeValueAsString(diff);
     }
 

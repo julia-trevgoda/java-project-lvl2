@@ -50,13 +50,13 @@ public class Differ {
 
         while (iter1 < data1.size()) {
             diff.add(new DiffElement(keys1.get(iter1), data1.get(keys1.get(iter1)),
-                    DiffElement.DiffType.REMOVE));
+                    DiffElement.DiffType.REMOVE_ONE));
             iter1++;
         }
 
         while (iter2 < data2.size()) {
             diff.add(new DiffElement(keys2.get(iter2), data2.get(keys2.get(iter2)),
-                    DiffElement.DiffType.ADD));
+                    DiffElement.DiffType.ADD_ONE));
             iter2++;
         }
 

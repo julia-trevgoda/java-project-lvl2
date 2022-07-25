@@ -3,6 +3,7 @@ package hexlet.code;
 import picocli.CommandLine;
 
 import java.io.File;
+import java.util.List;
 import java.util.concurrent.Callable;
 
 
@@ -43,9 +44,7 @@ public class App implements Callable<Void> {
      */
     @Override
     public Void call() throws Exception {
-
-        var diff = Differ.generate(file1, file2, format);
-        System.out.println(diff);
+        Differ.generate(file1, file2, format);
         return null;
     }
 
