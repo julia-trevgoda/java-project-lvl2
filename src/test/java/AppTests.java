@@ -61,7 +61,7 @@ public class AppTests {
     @Test
     @DisplayName("testParseJson2: call JsonParser through common parse method")
     void testParseJson2() throws IOException {
-        File file = new File("src/test/resources/testDiffJson2.json");
+        String file = "src/test/resources/testDiffJson2.json";
         Map<String, Object> actualResult = Parser.parse(file);
         assertEquals(actualResult, expectedResultParse2);
     }
@@ -77,7 +77,7 @@ public class AppTests {
     @Test
     @DisplayName("testParseYml2: call YmlParser through common parse method")
     void testParseYml2() throws IOException {
-        File file = new File("src/test/resources/testDiffYml2.yml");
+        String file = "src/test/resources/testDiffYml2.yml";
         Map<String, Object> actualResult = Parser.parse(file);
         assertEquals(actualResult, expectedResultParse2);
     }
@@ -93,7 +93,7 @@ public class AppTests {
     @Test
     @DisplayName("testParseYaml: call YamlParser through common parse method")
     void testParseYaml2() throws IOException {
-        File file = new File("src/test/resources/testDiffYaml2.yaml");
+        String file = "src/test/resources/testDiffYaml2.yaml";
         Map<String, Object> actualResult = Parser.parse(file);
         assertEquals(actualResult, expectedResultParse2);
     }
@@ -101,7 +101,7 @@ public class AppTests {
     @Test
     @DisplayName("test parse file without extension")
     void testParseFileWithoutExtension() throws IOException {
-        File file = new File("src/test/resources/testDiffDefault");
+        String file = "src/test/resources/testDiffDefault";
         Map<String, Object> expectedResult = Map.of("follow", false, "host", "hexlet.io",
                 "proxy", "123.234.53.22", "timeout", 50);
         Map<String, Object> actualResult = Parser.parse(file);
@@ -114,8 +114,8 @@ public class AppTests {
     @Test
     @DisplayName("testDiff: JSON: stylish")
     void testDiffJsonStylish() throws IOException {
-        File file1 = new File("src/test/resources/testDiffJson1.json");
-        File file2 = new File("src/test/resources/testDiffJson2.json");
+        String file1 = "src/test/resources/testDiffJson1.json";
+        String file2 = "src/test/resources/testDiffJson2.json";
         String expectedResult = """
                 {
                   chars1: [a, b, c]
@@ -149,8 +149,8 @@ public class AppTests {
     @Test
     @DisplayName("testDiff: JSON: default")
     void testDiffJsonDefault() throws IOException {
-        File file1 = new File("src/test/resources/testDiffJson1.json");
-        File file2 = new File("src/test/resources/testDiffJson2.json");
+        String file1 = "src/test/resources/testDiffJson1.json";
+        String file2 = "src/test/resources/testDiffJson2.json";
         String expectedResult = """
                 {
                   chars1: [a, b, c]
@@ -184,8 +184,8 @@ public class AppTests {
     @Test
     @DisplayName("testDiff: YML: default format")
     void testDiffYmlDefault() throws IOException {
-        File file1 = new File("src/test/resources/testDiffYml1.yml");
-        File file2 = new File("src/test/resources/testDiffYml2.yml");
+        String file1 = "src/test/resources/testDiffYml1.yml";
+        String file2 = "src/test/resources/testDiffYml2.yml";
         String expectedResult = """
                 {
                   chars1: [a, b, c]
@@ -219,8 +219,8 @@ public class AppTests {
     @Test
     @DisplayName("testDiff: JSON: plain")
     void testDiffJsonPlain() throws IOException {
-        File file1 = new File("src/test/resources/testDiffJson1.json");
-        File file2 = new File("src/test/resources/testDiffJson2.json");
+        String file1 = "src/test/resources/testDiffJson1.json";
+        String file2 = "src/test/resources/testDiffJson2.json";
         String expectedResult = """
                 Property chars2 was updated. From [complex value] to false
                 Property checked was updated. From false to true
@@ -243,8 +243,8 @@ public class AppTests {
     @Test
     @DisplayName("testDiff: YAML: plain")
     void testDiffYamlPlain() throws IOException {
-        File file1 = new File("src/test/resources/testDiffYaml1.yaml");
-        File file2 = new File("src/test/resources/testDiffYaml2.yaml");
+        String file1 = "src/test/resources/testDiffYaml1.yaml";
+        String file2 = "src/test/resources/testDiffYaml2.yaml";
         String expectedResult = """
                 Property chars2 was updated. From [complex value] to false
                 Property checked was updated. From false to true
@@ -267,8 +267,8 @@ public class AppTests {
     @Test
     @DisplayName("testDiff: JSON: Json")
     void testDiffJsonToJson() throws IOException {
-        File file1 = new File("src/test/resources/testDiffJson1.json");
-        File file2 = new File("src/test/resources/testDiffJson2.json");
+        String file1 = "src/test/resources/testDiffJson1.json";
+        String file2 = "src/test/resources/testDiffJson2.json";
         String expected = "[{\"key\":\"chars1\",\"value\":[\"a\",\"b\",\"c\"],\"param\":\"EQUALS\"}," +
                 "{\"key\":\"chars2\",\"value\":[\"d\",\"e\",\"f\"],\"param\":\"REMOVE\"}," +
                 "{\"key\":\"chars2\",\"value\":false,\"param\":\"ADD\"}," +
@@ -299,8 +299,8 @@ public class AppTests {
     @Test
     @DisplayName("testDiffJson1: file1.size() > file2.size()")
     void testdiffJson1() throws IOException {
-        File file1 = new File("src/test/resources/testDiffJson1.json");
-        File file2 = new File("src/test/resources/testDiffJson2_short.json");
+        String file1 = "src/test/resources/testDiffJson1.json";
+        String file2 = "src/test/resources/testDiffJson2_short.json";
         String expectedResult = """
                 {
                 - chars1: [a, b, c]
@@ -325,8 +325,8 @@ public class AppTests {
     @Test
     @DisplayName("testDiffYaml1: file1.size() < file2.size()")
     void testdiffYaml1() throws IOException {
-        File file1 = new File("src/test/resources/testDiffYaml1_short.yaml");
-        File file2 = new File("src/test/resources/testDiffYaml2.yaml");
+        String file1 = "src/test/resources/testDiffYaml1_short.yaml";
+        String file2 = "src/test/resources/testDiffYaml2.yaml";
         String expectedResult = """
                 Property chars1 was added with value: [complex value]
                 Property chars2 was updated. From [complex value] to false

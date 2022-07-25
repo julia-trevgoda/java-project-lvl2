@@ -27,14 +27,14 @@ public class App implements Callable<Void> {
             paramLabel = "filepath1",
             description = "path to first file"
     )
-    private File file1;
+    private String file1;
 
     @CommandLine.Parameters(
             index = "1",
             paramLabel = "filepath2",
             description = "path to second file"
     )
-    private File file2;
+    private String file2;
 
     /**
      * Diff.generate() method compares 2 files.

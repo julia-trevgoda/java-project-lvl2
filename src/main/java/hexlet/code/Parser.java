@@ -7,6 +7,8 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -35,7 +37,9 @@ public class Parser {
         }
     }
 
-    public static Map<String, Object> parse(File file) throws IOException {
+    public static Map<String, Object> parse(String pathToFile) throws IOException {
+        Path path = Paths.get(pathToFile);
+        File file = path.toFile();
         String type = getExtension(String.valueOf(file.toPath()));
         return switch (type) {
             case "json" -> parseJson(file);

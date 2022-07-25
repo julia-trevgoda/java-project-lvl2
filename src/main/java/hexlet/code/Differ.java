@@ -11,7 +11,7 @@ import static hexlet.code.Parser.parse;
 
 public class Differ {
 
-    public static String generate(File file1, File file2, String format) throws IOException {
+    public static String generate(String file1, String file2, String format) throws IOException {
 
         Map<String, Object> data1 = parse(file1);
         Map<String, Object> data2 = parse(file2);
@@ -63,7 +63,7 @@ public class Differ {
         return formatDiff(format, diff);
     }
 
-    public static String generate(File file1, File file2) throws IOException {
+    public static String generate(String file1, String file2) throws IOException {
         return generate(file1, file2, "");
     }
 }
