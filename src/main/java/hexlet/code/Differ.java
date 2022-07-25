@@ -62,4 +62,8 @@ public class Differ {
 
         return formatDiff(format, diff);
     }
+
+    public static String generate(File file1, File file2) throws IOException {
+        return generate(file1, file2, "");
+    }
 }
