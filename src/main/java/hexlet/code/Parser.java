@@ -13,8 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static org.apache.commons.io.FileUtils.getExtension;
-
 public class Parser {
 
     public static Map<String, Object> parseJson(File file) throws IOException {
@@ -38,12 +36,12 @@ public class Parser {
     }
 
     public static Map<String, Object> parse(String pathToFile) throws IOException {
+        String type = pathToFile.contains(".") ? pathToFile.substring(pathToFile.lastIndexOf(".")) : "";
         Path path = Paths.get(pathToFile);
         File file = path.toFile();
-        String type = getExtension(String.valueOf(file.toPath()));
         return switch (type) {
-            case "json" -> parseJson(file);
-            case "yml", "yaml" -> parseYml(file);
+            case ".json" -> parseJson(file);
+            case ".yml", ".yaml" -> parseYml(file);
             default -> parseJson(file);
         };
     }
