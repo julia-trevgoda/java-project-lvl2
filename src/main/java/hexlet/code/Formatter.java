@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+
+import static hexlet.code.DiffElement.DiffType.EQUALS;
 
 public class Formatter {
 
@@ -47,19 +50,26 @@ public class Formatter {
 
     public static String formatPlain(List<DiffElement> diff) {
         StringBuilder output = new StringBuilder();
+        DiffElement diffElement;
 
-        for (DiffElement diffElement : diff) {
+        for (int i = 0; i < diff.size(); i++) {
+            diffElement = diff.get(i);
             switch (diffElement.getParam()) {
                 case ADD_ONE -> output.append("Property ").append("'" + diffElement.getKey() + "'")
                         .append(" was added with value: ")
-                        .append(getPlainValue(diffElement.getValue())).append("\n");
+                        .append(getPlainValue(diffElement.getValue()));
                 case REMOVE_ONE -> output.append("Property ").append("'" + diffElement.getKey() + "'")
-                        .append(" was removed").append("\n");
+                        .append(" was removed");
                 case REMOVE -> output.append("Property ").append("'" + diffElement.getKey() + "'")
-                        .append(" was updated. From ").append(getPlainValue(diffElement.getValue()));
-                case ADD -> output.append(" to ").append(getPlainValue(diffElement.getValue())).append("\n");
+                        .append(" was updated. From ").append(getPlainValue(diffElement.getValue()) + " ");
+                case ADD -> output.append("to ").append(getPlainValue(diffElement.getValue()));
                 default -> {
                 }
+            }
+            if (i != diff.size() - 1 && !output.isEmpty()
+                    && (!Objects.equals(output.substring(output.length() - 1), " "))
+                    && !diffElement.getParam().equals(EQUALS)) {
+                output.append("\n");
             }
 
         }

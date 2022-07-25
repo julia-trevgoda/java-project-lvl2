@@ -1,4 +1,3 @@
-import hexlet.code.DiffElement;
 import hexlet.code.Differ;
 import hexlet.code.Parser;
 import org.junit.jupiter.api.BeforeAll;
@@ -234,8 +233,7 @@ public class AppTests {
                 Property 'obj1' was added with value: [complex value]
                 Property 'setting1' was updated. From 'Some value' to 'Another value'
                 Property 'setting2' was updated. From 200 to 300
-                Property 'setting3' was updated. From true to 'none'
-                """;
+                Property 'setting3' was updated. From true to 'none'""";
         String actualResult = Differ.generate(file1, file2, "plain");
         assertEquals(actualResult, expectedResult);
     }
@@ -258,8 +256,7 @@ public class AppTests {
                 Property 'obj1' was added with value: [complex value]
                 Property 'setting1' was updated. From 'Some value' to 'Another value'
                 Property 'setting2' was updated. From 200 to 300
-                Property 'setting3' was updated. From true to 'none'
-                """;
+                Property 'setting3' was updated. From true to 'none'""";
         String actualResult = Differ.generate(file1, file2, "plain");
         assertEquals(actualResult, expectedResult);
     }
@@ -342,8 +339,7 @@ public class AppTests {
                 Property 'obj1' was added with value: [complex value]
                 Property 'setting1' was added with value: 'Another value'
                 Property 'setting2' was added with value: 300
-                Property 'setting3' was added with value: 'none'
-                """;
+                Property 'setting3' was added with value: 'none'""";
         String actualResult = Differ.generate(file1, file2, "plain");
         assertEquals(actualResult, expectedResult);
     }
