@@ -222,19 +222,19 @@ public class AppTests {
         String file1 = "src/test/resources/testDiffJson1.json";
         String file2 = "src/test/resources/testDiffJson2.json";
         String expectedResult = """
-                  Property chars2 was updated. From [complex value] to false
-                  Property checked was updated. From false to true
-                  Property default was updated. From null to [complex value]
-                  Property id was updated. From 45 to null
-                  Property key1 was removed
-                  Property key2 was added with value: 'value2'
-                  Property numbers2 was updated. From [complex value] to [complex value]
-                  Property numbers3 was removed
-                  Property numbers4 was added with value: [complex value]
-                  Property obj1 was added with value: [complex value]
-                  Property setting1 was updated. From 'Some value' to 'Another value'
-                  Property setting2 was updated. From 200 to 300
-                  Property setting3 was updated. From true to 'none'
+                Property chars2 was updated. From [complex value] to false
+                Property checked was updated. From false to true
+                Property default was updated. From null to [complex value]
+                Property id was updated. From 45 to null
+                Property key1 was removed
+                Property key2 was added with value: 'value2'
+                Property numbers2 was updated. From [complex value] to [complex value]
+                Property numbers3 was removed
+                Property numbers4 was added with value: [complex value]
+                Property obj1 was added with value: [complex value]
+                Property setting1 was updated. From 'Some value' to 'Another value'
+                Property setting2 was updated. From 200 to 300
+                Property setting3 was updated. From true to 'none'
                 """;
         String actualResult = Differ.generate(file1, file2, "plain");
         assertEquals(actualResult, expectedResult);
@@ -246,19 +246,19 @@ public class AppTests {
         String file1 = "src/test/resources/testDiffYaml1.yaml";
         String file2 = "src/test/resources/testDiffYaml2.yaml";
         String expectedResult = """
-                  Property chars2 was updated. From [complex value] to false
-                  Property checked was updated. From false to true
-                  Property default was updated. From null to [complex value]
-                  Property id was updated. From 45 to null
-                  Property key1 was removed
-                  Property key2 was added with value: 'value2'
-                  Property numbers2 was updated. From [complex value] to [complex value]
-                  Property numbers3 was removed
-                  Property numbers4 was added with value: [complex value]
-                  Property obj1 was added with value: [complex value]
-                  Property setting1 was updated. From 'Some value' to 'Another value'
-                  Property setting2 was updated. From 200 to 300
-                  Property setting3 was updated. From true to 'none'
+                Property chars2 was updated. From [complex value] to false
+                Property checked was updated. From false to true
+                Property default was updated. From null to [complex value]
+                Property id was updated. From 45 to null
+                Property key1 was removed
+                Property key2 was added with value: 'value2'
+                Property numbers2 was updated. From [complex value] to [complex value]
+                Property numbers3 was removed
+                Property numbers4 was added with value: [complex value]
+                Property obj1 was added with value: [complex value]
+                Property setting1 was updated. From 'Some value' to 'Another value'
+                Property setting2 was updated. From 200 to 300
+                Property setting3 was updated. From true to 'none'
                 """;
         String actualResult = Differ.generate(file1, file2, "plain");
         assertEquals(actualResult, expectedResult);
@@ -328,21 +328,21 @@ public class AppTests {
         String file1 = "src/test/resources/testDiffYaml1_short.yaml";
         String file2 = "src/test/resources/testDiffYaml2.yaml";
         String expectedResult = """
-                  Property chars1 was added with value: [complex value]
-                  Property chars2 was updated. From [complex value] to false
-                  Property checked was added with value: true
-                  Property default was added with value: [complex value]
-                  Property id was added with value: null
-                  Property key1 was removed
-                  Property key2 was added with value: 'value2'
-                  Property numbers1 was added with value: [complex value]
-                  Property numbers2 was added with value: [complex value]
-                  Property numbers3 was removed
-                  Property numbers4 was added with value: [complex value]
-                  Property obj1 was added with value: [complex value]
-                  Property setting1 was added with value: 'Another value'
-                  Property setting2 was added with value: 300
-                  Property setting3 was added with value: 'none'
+                Property chars1 was added with value: [complex value]
+                Property chars2 was updated. From [complex value] to false
+                Property checked was added with value: true
+                Property default was added with value: [complex value]
+                Property id was added with value: null
+                Property key1 was removed
+                Property key2 was added with value: 'value2'
+                Property numbers1 was added with value: [complex value]
+                Property numbers2 was added with value: [complex value]
+                Property numbers3 was removed
+                Property numbers4 was added with value: [complex value]
+                Property obj1 was added with value: [complex value]
+                Property setting1 was added with value: 'Another value'
+                Property setting2 was added with value: 300
+                Property setting3 was added with value: 'none'
                 """;
         String actualResult = Differ.generate(file1, file2, "plain");
         assertEquals(actualResult, expectedResult);
