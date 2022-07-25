@@ -31,11 +31,11 @@ public class Formatter {
 
         for (DiffElement diffElement : diff) {
             switch (diffElement.getParam()) {
-                case ADD, ADD_ONE -> output.append("    + ").append(diffElement.getKey()).append(": ")
+                case ADD, ADD_ONE -> output.append("  + ").append(diffElement.getKey()).append(": ")
                         .append(diffElement.getValue()).append("\n");
-                case REMOVE, REMOVE_ONE -> output.append("    - ").append(diffElement.getKey()).append(": ")
+                case REMOVE, REMOVE_ONE -> output.append("  - ").append(diffElement.getKey()).append(": ")
                         .append(diffElement.getValue()).append("\n");
-                case EQUALS -> output.append("      ").append(diffElement.getKey()).append(": ")
+                case EQUALS -> output.append("    ").append(diffElement.getKey()).append(": ")
                         .append(diffElement.getValue()).append("\n");
                 default -> {
                 }
@@ -50,12 +50,12 @@ public class Formatter {
 
         for (DiffElement diffElement : diff) {
             switch (diffElement.getParam()) {
-                case ADD_ONE -> output.append("    Property ").append(diffElement.getKey())
+                case ADD_ONE -> output.append("  Property ").append(diffElement.getKey())
                         .append(" was added with value: ")
                         .append(getPlainValue(diffElement.getValue())).append("\n");
-                case REMOVE_ONE -> output.append("    Property ").append(diffElement.getKey()).append(" was removed")
+                case REMOVE_ONE -> output.append("  Property ").append(diffElement.getKey()).append(" was removed")
                         .append("\n");
-                case REMOVE -> output.append("    Property ").append(diffElement.getKey()).append(" was updated. From ")
+                case REMOVE -> output.append("  Property ").append(diffElement.getKey()).append(" was updated. From ")
                         .append(getPlainValue(diffElement.getValue()));
                 case ADD -> output.append(" to ").append(getPlainValue(diffElement.getValue())).append("\n");
                 default -> {
