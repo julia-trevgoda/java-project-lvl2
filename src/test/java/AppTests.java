@@ -1,79 +1,54 @@
 import hexlet.code.Differ;
 import hexlet.code.Parser;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.Map;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AppTests {
 
-    public Map<String, Object> expectedResultParse1 = new TreeMap<>();
-    public Map<String, Object> expectedResultParse2 = new TreeMap<>();
+//    public static String getExpectedResultParse1(String pathToFile) throws IOException {
+//        return Files.readString(Paths.get(pathToFile));
+//    }
+//    File expectedResultParse1 = Paths.get(pathToFile).toFile();
 
-    @BeforeAll
-    public void init() {
-        expectedResultParse1.put("chars1", Arrays.asList("a", "b", "c"));
-        expectedResultParse1.put("chars2", Arrays.asList("d", "e", "f"));
-        expectedResultParse1.put("checked", false);
-        expectedResultParse1.put("default", null);
-        expectedResultParse1.put("id", 45);
-        expectedResultParse1.put("key1", "value1");
-        expectedResultParse1.put("numbers1", Arrays.asList(1,2,3,4));
-        expectedResultParse1.put("numbers2", Arrays.asList(2,3,4,5));
-        expectedResultParse1.put("numbers3", Arrays.asList(3,4,5));
-        expectedResultParse1.put("setting1", "Some value");
-        expectedResultParse1.put("setting2", 200);
-        expectedResultParse1.put("setting3", true);
-
-        expectedResultParse2.put("chars1",Arrays.asList("a","b","c"));
-        expectedResultParse2.put("chars2",false);
-        expectedResultParse2.put("checked",true);
-        expectedResultParse2.put("default",Arrays.asList("value1","value2"));
-        expectedResultParse2.put("id",null);
-        expectedResultParse2.put("key2","value2");
-        expectedResultParse2.put("numbers1",Arrays.asList(1,2,3,4));
-        expectedResultParse2.put("numbers2",Arrays.asList(22,33,44,55));
-        expectedResultParse2.put("numbers4",Arrays.asList(4,5,6));
-        expectedResultParse2.put("obj1",Map.of("nestedKey","value","isNested",true));
-        expectedResultParse2.put("setting1","Another value");
-        expectedResultParse2.put("setting2",300);
-        expectedResultParse2.put("setting3","none");
-    }
+    public String expectedResultParse1 = "{chars1=[a, b, c], chars2=[d, e, f], " +
+            "checked=false, default=null, id=45, key1=value1, numbers1=[1, 2, 3, 4]," +
+            " numbers2=[2, 3, 4, 5], numbers3=[3, 4, 5], setting1=Some value," +
+            " setting2=200, setting3=true}";
+    public String expectedResultParse2 = "{chars1=[a, b, c], chars2=false, checked=true," +
+            " default=[value1, value2], id=null, key2=value2, numbers1=[1, 2, 3, 4]," +
+            " numbers2=[22, 33, 44, 55], numbers4=[4, 5, 6], obj1={nestedKey=value, isNested=true}," +
+            " setting1=Another value, setting2=300, setting3=none}";
 
     //Tests on Parser (json, yml, yaml) > returns Map<String, Object>
 
     @Test
     @DisplayName("testParseJson: call JsonParser directly")
     void testParseJson() throws IOException {
-//        File file = new File("src/test/resources/testDiffJson1.json");
         String file = "src/test/resources/testDiffJson1.json";
         Map<String, Object> actualResult = Parser.parseJson(file);
-        assertEquals(actualResult, expectedResultParse1);
+        assertEquals(actualResult.toString(), expectedResultParse1);
     }
 
     @Test
     @DisplayName("testParseJson2: call JsonParser through common parse method")
     void testParseJson2() throws IOException {
-//        String file = "src/test/resources/testDiffJson2.json";
-        String file = "/Users/jtrevgoda/Hexlet/java-project-lvl2/src/test/resources/testDiffJson2.json";
+        String file = "src/test/resources/testDiffJson2.json";
         Map<String, Object> actualResult = Parser.parse(file);
-        assertEquals(actualResult, expectedResultParse2);
+        assertEquals(actualResult.toString(), expectedResultParse2);
     }
 
     @Test
     @DisplayName("testParseYml: call YmlParser directly")
     void testParseYml() throws IOException {
-//        File file = new File("src/test/resources/testDiffYml1.yml");
         String file = "src/test/resources/testDiffYml1.yml";
         Map<String, Object> actualResult = Parser.parseYml(file);
-        assertEquals(actualResult, expectedResultParse1);
+        assertEquals(actualResult.toString(), expectedResultParse1);
     }
 
     @Test
@@ -81,16 +56,15 @@ public class AppTests {
     void testParseYml2() throws IOException {
         String file = "src/test/resources/testDiffYml2.yml";
         Map<String, Object> actualResult = Parser.parse(file);
-        assertEquals(actualResult, expectedResultParse2);
+        assertEquals(actualResult.toString(), expectedResultParse2);
     }
 
     @Test
     @DisplayName("testParseYaml: call YamlParser directly")
     void testParseYaml() throws IOException {
-//        File file = new File("src/test/resources/testDiffYaml1.yaml");
         String file = "src/test/resources/testDiffYaml1.yaml";
         Map<String, Object> actualResult = Parser.parseYml(file);
-        assertEquals(actualResult, expectedResultParse1);
+        assertEquals(actualResult.toString(), expectedResultParse1);
     }
 
     @Test
@@ -98,7 +72,7 @@ public class AppTests {
     void testParseYaml2() throws IOException {
         String file = "src/test/resources/testDiffYaml2.yaml";
         Map<String, Object> actualResult = Parser.parse(file);
-        assertEquals(actualResult, expectedResultParse2);
+        assertEquals(actualResult.toString(), expectedResultParse2);
     }
 
     @Test
@@ -117,9 +91,7 @@ public class AppTests {
     @Test
     @DisplayName("testDiff: JSON: stylish")
     void testDiffJsonStylish() throws IOException {
-//        String file1 = "src/test/resources/testDiffJson1.json";
         String file1 = "/Users/jtrevgoda/Hexlet/java-project-lvl2/src/test/resources/testDiffJson1.json";
-//        String file2 = "src/test/resources/testDiffJson2.json";
         String file2 = "/Users/jtrevgoda/Hexlet/java-project-lvl2/src/test/resources/testDiffJson2.json";
         String expectedResult = """
                 {
