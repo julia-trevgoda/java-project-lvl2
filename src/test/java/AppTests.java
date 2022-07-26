@@ -16,14 +16,14 @@ public class AppTests {
 //    }
 //    File expectedResultParse1 = Paths.get(pathToFile).toFile();
 
-    public String expectedResultParse1 = "{chars1=[a, b, c], chars2=[d, e, f], " +
-            "checked=false, default=null, id=45, key1=value1, numbers1=[1, 2, 3, 4]," +
-            " numbers2=[2, 3, 4, 5], numbers3=[3, 4, 5], setting1=Some value," +
-            " setting2=200, setting3=true}";
-    public String expectedResultParse2 = "{chars1=[a, b, c], chars2=false, checked=true," +
-            " default=[value1, value2], id=null, key2=value2, numbers1=[1, 2, 3, 4]," +
-            " numbers2=[22, 33, 44, 55], numbers4=[4, 5, 6], obj1={nestedKey=value, isNested=true}," +
-            " setting1=Another value, setting2=300, setting3=none}";
+    public String expectedResultParse1 = "{chars1=[a, b, c], chars2=[d, e, f], "
+            + "checked=false, default=null, id=45, key1=value1, numbers1=[1, 2, 3, 4],"
+            + " numbers2=[2, 3, 4, 5], numbers3=[3, 4, 5], setting1=Some value,"
+            + " setting2=200, setting3=true}";
+    public String expectedResultParse2 = "{chars1=[a, b, c], chars2=false, checked=true,"
+            + " default=[value1, value2], id=null, key2=value2, numbers1=[1, 2, 3, 4],"
+            + " numbers2=[22, 33, 44, 55], numbers4=[4, 5, 6], obj1={nestedKey=value, isNested=true},"
+            + " setting1=Another value, setting2=300, setting3=none}";
 
     //Tests on Parser (json, yml, yaml) > returns Map<String, Object>
 
@@ -79,10 +79,9 @@ public class AppTests {
     @DisplayName("test parse file without extension")
     void testParseFileWithoutExtension() throws IOException {
         String file = "src/test/resources/testDiffDefault";
-        Map<String, Object> expectedResult = Map.of("follow", false, "host", "hexlet.io",
-                "proxy", "123.234.53.22", "timeout", 50);
+        String expectedResult = "{follow=false, host=hexlet.io, proxy=123.234.53.22, timeout=50}";
         Map<String, Object> actualResult = Parser.parse(file);
-        assertEquals(actualResult, expectedResult);
+        assertEquals(actualResult.toString(), expectedResult);
     }
 
 
@@ -244,29 +243,29 @@ public class AppTests {
     void testDiffJsonToJson() throws IOException {
         String file1 = "src/test/resources/testDiffJson1.json";
         String file2 = "src/test/resources/testDiffJson2.json";
-        String expected = "[{\"key\":\"chars1\",\"value\":[\"a\",\"b\",\"c\"],\"param\":\"EQUALS\"}," +
-                "{\"key\":\"chars2\",\"value\":[\"d\",\"e\",\"f\"],\"param\":\"REMOVE\"}," +
-                "{\"key\":\"chars2\",\"value\":false,\"param\":\"ADD\"}," +
-                "{\"key\":\"checked\",\"value\":false,\"param\":\"REMOVE\"}," +
-                "{\"key\":\"checked\",\"value\":true,\"param\":\"ADD\"}," +
-                "{\"key\":\"default\",\"value\":null,\"param\":\"REMOVE\"}," +
-                "{\"key\":\"default\",\"value\":[\"value1\",\"value2\"],\"param\":\"ADD\"}," +
-                "{\"key\":\"id\",\"value\":45,\"param\":\"REMOVE\"}," +
-                "{\"key\":\"id\",\"value\":null,\"param\":\"ADD\"}," +
-                "{\"key\":\"key1\",\"value\":\"value1\",\"param\":\"REMOVE_ONE\"}," +
-                "{\"key\":\"key2\",\"value\":\"value2\",\"param\":\"ADD_ONE\"}," +
-                "{\"key\":\"numbers1\",\"value\":[1,2,3,4],\"param\":\"EQUALS\"}," +
-                "{\"key\":\"numbers2\",\"value\":[2,3,4,5],\"param\":\"REMOVE\"}," +
-                "{\"key\":\"numbers2\",\"value\":[22,33,44,55],\"param\":\"ADD\"}," +
-                "{\"key\":\"numbers3\",\"value\":[3,4,5],\"param\":\"REMOVE_ONE\"}," +
-                "{\"key\":\"numbers4\",\"value\":[4,5,6],\"param\":\"ADD_ONE\"}," +
-                "{\"key\":\"obj1\",\"value\":{\"nestedKey\":\"value\",\"isNested\":true},\"param\":\"ADD_ONE\"}," +
-                "{\"key\":\"setting1\",\"value\":\"Some value\",\"param\":\"REMOVE\"}," +
-                "{\"key\":\"setting1\",\"value\":\"Another value\",\"param\":\"ADD\"}," +
-                "{\"key\":\"setting2\",\"value\":200,\"param\":\"REMOVE\"}," +
-                "{\"key\":\"setting2\",\"value\":300,\"param\":\"ADD\"}," +
-                "{\"key\":\"setting3\",\"value\":true,\"param\":\"REMOVE\"}," +
-                "{\"key\":\"setting3\",\"value\":\"none\",\"param\":\"ADD\"}]";
+        String expected = "[{\"key\":\"chars1\",\"value\":[\"a\",\"b\",\"c\"],\"param\":\"EQUALS\"},"
+                + "{\"key\":\"chars2\",\"value\":[\"d\",\"e\",\"f\"],\"param\":\"REMOVE_UPDATED\"},"
+                + "{\"key\":\"chars2\",\"value\":false,\"param\":\"ADD_UPDATED\"},"
+                + "{\"key\":\"checked\",\"value\":false,\"param\":\"REMOVE_UPDATED\"},"
+                + "{\"key\":\"checked\",\"value\":true,\"param\":\"ADD_UPDATED\"},"
+                + "{\"key\":\"default\",\"value\":null,\"param\":\"REMOVE_UPDATED\"},"
+                + "{\"key\":\"default\",\"value\":[\"value1\",\"value2\"],\"param\":\"ADD_UPDATED\"},"
+                + "{\"key\":\"id\",\"value\":45,\"param\":\"REMOVE_UPDATED\"},"
+                + "{\"key\":\"id\",\"value\":null,\"param\":\"ADD_UPDATED\"},"
+                + "{\"key\":\"key1\",\"value\":\"value1\",\"param\":\"REMOVE_ONE\"},"
+                + "{\"key\":\"key2\",\"value\":\"value2\",\"param\":\"ADD_ONE\"},"
+                + "{\"key\":\"numbers1\",\"value\":[1,2,3,4],\"param\":\"EQUALS\"},"
+                + "{\"key\":\"numbers2\",\"value\":[2,3,4,5],\"param\":\"REMOVE_UPDATED\"},"
+                + "{\"key\":\"numbers2\",\"value\":[22,33,44,55],\"param\":\"ADD_UPDATED\"},"
+                + "{\"key\":\"numbers3\",\"value\":[3,4,5],\"param\":\"REMOVE_ONE\"},"
+                + "{\"key\":\"numbers4\",\"value\":[4,5,6],\"param\":\"ADD_ONE\"},"
+                + "{\"key\":\"obj1\",\"value\":{\"nestedKey\":\"value\",\"isNested\":true},\"param\":\"ADD_ONE\"},"
+                + "{\"key\":\"setting1\",\"value\":\"Some value\",\"param\":\"REMOVE_UPDATED\"},"
+                + "{\"key\":\"setting1\",\"value\":\"Another value\",\"param\":\"ADD_UPDATED\"},"
+                + "{\"key\":\"setting2\",\"value\":200,\"param\":\"REMOVE_UPDATED\"},"
+                + "{\"key\":\"setting2\",\"value\":300,\"param\":\"ADD_UPDATED\"},"
+                + "{\"key\":\"setting3\",\"value\":true,\"param\":\"REMOVE_UPDATED\"},"
+                + "{\"key\":\"setting3\",\"value\":\"none\",\"param\":\"ADD_UPDATED\"}]";
         String actual = Differ.generate(file1, file2, "json");
         assertEquals(actual, expected);
     }

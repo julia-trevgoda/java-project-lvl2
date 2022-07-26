@@ -32,8 +32,8 @@ public class Differ {
                 if ((data1.get(key1) != null && data2.get(key2) != null) && data1.get(key1).equals(data2.get(key2))) {
                     diff.add(new DiffElement(key1, data1.get(key1), DiffElement.DiffType.EQUALS));
                 } else {
-                    diff.add(new DiffElement(key1, data1.get(key1), DiffElement.DiffType.REMOVE));
-                    diff.add(new DiffElement(key2, data2.get(key2), DiffElement.DiffType.ADD));
+                    diff.add(new DiffElement(key1, data1.get(key1), DiffElement.DiffType.REMOVE_UPDATED));
+                    diff.add(new DiffElement(key2, data2.get(key2), DiffElement.DiffType.ADD_UPDATED));
                 }
                 iter1++;
                 iter2++;

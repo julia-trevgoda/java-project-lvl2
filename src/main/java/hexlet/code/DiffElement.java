@@ -3,8 +3,8 @@ package hexlet.code;
 public class DiffElement {
 
     public enum DiffType {
-        ADD,
-        REMOVE,
+        ADD_UPDATED,
+        REMOVE_UPDATED,
         EQUALS,
         ADD_ONE,
         REMOVE_ONE

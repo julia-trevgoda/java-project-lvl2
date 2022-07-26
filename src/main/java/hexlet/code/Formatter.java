@@ -34,9 +34,9 @@ public class Formatter {
 
         for (DiffElement diffElement : diff) {
             switch (diffElement.getParam()) {
-                case ADD, ADD_ONE -> output.append("  + ").append(diffElement.getKey()).append(": ")
+                case ADD_UPDATED, ADD_ONE -> output.append("  + ").append(diffElement.getKey()).append(": ")
                         .append(diffElement.getValue()).append("\n");
-                case REMOVE, REMOVE_ONE -> output.append("  - ").append(diffElement.getKey()).append(": ")
+                case REMOVE_UPDATED, REMOVE_ONE -> output.append("  - ").append(diffElement.getKey()).append(": ")
                         .append(diffElement.getValue()).append("\n");
                 case EQUALS -> output.append("    ").append(diffElement.getKey()).append(": ")
                         .append(diffElement.getValue()).append("\n");
@@ -60,9 +60,9 @@ public class Formatter {
                         .append(getPlainValue(diffElement.getValue()));
                 case REMOVE_ONE -> output.append("Property ").append("'" + diffElement.getKey() + "'")
                         .append(" was removed");
-                case REMOVE -> output.append("Property ").append("'" + diffElement.getKey() + "'")
+                case REMOVE_UPDATED -> output.append("Property ").append("'" + diffElement.getKey() + "'")
                         .append(" was updated. From ").append(getPlainValue(diffElement.getValue()) + " ");
-                case ADD -> output.append("to ").append(getPlainValue(diffElement.getValue()));
+                case ADD_UPDATED -> output.append("to ").append(getPlainValue(diffElement.getValue()));
                 default -> {
                 }
             }
