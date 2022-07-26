@@ -6,8 +6,6 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,34 +13,35 @@ import java.util.TreeMap;
 
 public class Parser {
 
-    public static Map<String, Object> parseJson(File file) throws IOException {
+    public static Map<String, Object> parseJson(String pathToFile) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
+        File file = Paths.get(pathToFile).toFile();
+        System.out.println(file);
         if (file.length() == 0) {
             return new HashMap<>();
         } else {
-            return objectMapper.readValue(Files.readString(file.toPath().toAbsolutePath()),
+            return objectMapper.readValue(file,
                     new TypeReference<TreeMap<String, Object>>() { });
         }
     }
 
-    public static Map<String, Object> parseYml(File file) throws IOException {
+    public static Map<String, Object> parseYml(String pathToFile) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
+        File file = Paths.get(pathToFile).toFile();
         if (file.length() == 0) {
             return new HashMap<>();
         } else {
-            return objectMapper.readValue(Files.readString(file.toPath().toAbsolutePath()),
+            return objectMapper.readValue(file,
                     new TypeReference<TreeMap<String, Object>>() { });
         }
     }
 
     public static Map<String, Object> parse(String pathToFile) throws IOException {
         String type = pathToFile.contains(".") ? pathToFile.substring(pathToFile.lastIndexOf(".")) : "";
-        Path path = Paths.get(pathToFile);
-        File file = path.toFile();
         return switch (type) {
-            case ".json" -> parseJson(file);
-            case ".yml", ".yaml" -> parseYml(file);
-            default -> parseJson(file);
+            case ".json" -> parseJson(pathToFile);
+            case ".yml", ".yaml" -> parseYml(pathToFile);
+            default -> parseJson(pathToFile);
         };
     }
 }

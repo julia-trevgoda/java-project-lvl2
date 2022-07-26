@@ -52,7 +52,8 @@ public class AppTests {
     @Test
     @DisplayName("testParseJson: call JsonParser directly")
     void testParseJson() throws IOException {
-        File file = new File("src/test/resources/testDiffJson1.json");
+//        File file = new File("src/test/resources/testDiffJson1.json");
+        String file = "src/test/resources/testDiffJson1.json";
         Map<String, Object> actualResult = Parser.parseJson(file);
         assertEquals(actualResult, expectedResultParse1);
     }
@@ -60,7 +61,8 @@ public class AppTests {
     @Test
     @DisplayName("testParseJson2: call JsonParser through common parse method")
     void testParseJson2() throws IOException {
-        String file = "src/test/resources/testDiffJson2.json";
+//        String file = "src/test/resources/testDiffJson2.json";
+        String file = "/Users/jtrevgoda/Hexlet/java-project-lvl2/src/test/resources/testDiffJson2.json";
         Map<String, Object> actualResult = Parser.parse(file);
         assertEquals(actualResult, expectedResultParse2);
     }
@@ -68,7 +70,8 @@ public class AppTests {
     @Test
     @DisplayName("testParseYml: call YmlParser directly")
     void testParseYml() throws IOException {
-        File file = new File("src/test/resources/testDiffYml1.yml");
+//        File file = new File("src/test/resources/testDiffYml1.yml");
+        String file = "src/test/resources/testDiffYml1.yml";
         Map<String, Object> actualResult = Parser.parseYml(file);
         assertEquals(actualResult, expectedResultParse1);
     }
@@ -84,7 +87,8 @@ public class AppTests {
     @Test
     @DisplayName("testParseYaml: call YamlParser directly")
     void testParseYaml() throws IOException {
-        File file = new File("src/test/resources/testDiffYaml1.yaml");
+//        File file = new File("src/test/resources/testDiffYaml1.yaml");
+        String file = "src/test/resources/testDiffYaml1.yaml";
         Map<String, Object> actualResult = Parser.parseYml(file);
         assertEquals(actualResult, expectedResultParse1);
     }
@@ -113,8 +117,10 @@ public class AppTests {
     @Test
     @DisplayName("testDiff: JSON: stylish")
     void testDiffJsonStylish() throws IOException {
-        String file1 = "src/test/resources/testDiffJson1.json";
-        String file2 = "src/test/resources/testDiffJson2.json";
+//        String file1 = "src/test/resources/testDiffJson1.json";
+        String file1 = "/Users/jtrevgoda/Hexlet/java-project-lvl2/src/test/resources/testDiffJson1.json";
+//        String file2 = "src/test/resources/testDiffJson2.json";
+        String file2 = "/Users/jtrevgoda/Hexlet/java-project-lvl2/src/test/resources/testDiffJson2.json";
         String expectedResult = """
                 {
                     chars1: [a, b, c]
@@ -343,127 +349,4 @@ public class AppTests {
         String actualResult = Differ.generate(file1, file2, "plain");
         assertEquals(actualResult, expectedResult);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    @Test
-//    @DisplayName("testDiffJsonOneIsEmpty: second file is empty")
-//    void testDiffJsonOneIsEmpty() throws IOException {
-//        File file1 = new File("src/test/resources/testDiffJson1.json");
-//        File file2 = new File("src/test/resources/testDiffJsonEmpty.json");
-//        String expectedResult = """
-//                {
-//                - chars1: [a, b, c]
-//                - chars2: [d, e, f]
-//                - checked: false
-//                - default: null
-//                - id: 45
-//                - key1: value1
-//                - numbers1: [1, 2, 3, 4]
-//                - numbers2: [2, 3, 4, 5]
-//                - numbers3: [3, 4, 5]
-//                - setting1: Some value
-//                - setting2: 200
-//                - setting3: true
-//                }""";
-//        String actualResult = Differ.generate(file1, file2, "");
-//        assertEquals(actualResult, expectedResult);
-//    }
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//    @Test
-//    @DisplayName("testDiffJson2: file2.size() > file1.size()")
-//    void testDiffJson2() throws IOException {
-//        File file1 = new File("src/test/resources/testDiffJson2_1.json");
-//        File file2 = new File("src/test/resources/testDiffJson2_2.json");
-//        String expectedResult = """
-//                {
-//                + follow: false
-//                  host: hexlet.io
-//                + proxy: 123.234.53.22
-//                - timeout: 20
-//                + timeout: 50
-//                - verbose: true
-//                }""";
-//        String actualResult = Differ.generate(file1, file2, "stylish");
-//        assertEquals(actualResult, expectedResult);
-//    }
-//
-//
-//
-//
-//
-//    @Test
-//    @DisplayName("testDiffYml: file2 is empty")
-//    void testDiffYml2() throws IOException {
-//        File file1 = new File("src/test/resources/testDiffYaml3_1.yml");
-//        File file2 = new File("src/test/resources/testDiffYamlEmpty.yml");
-//        String expectedResult = """
-//                {
-//                - host: hexlet.io
-//                - timeout: 20
-//                - verbose: true
-//                }""";
-//        String actualResult = Differ.generate(file1, file2, "");
-//        assertEquals(actualResult, expectedResult);
-//    }
-//
-//
-//
-//    @Test
-//    @DisplayName("testDiffYaml3: files with nested data")
-//    void testDiffYaml3() throws IOException {
-//        File file1 = new File("src/test/resources/testDiffYaml1.yml");
-//        File file2 = new File("src/test/resources/testDiffYaml2.yml");
-//        String expectedResult = """
-//                {
-//                  chars1: [a, b, c]
-//                - chars2: [d, e, f]
-//                + chars2: false
-//                - checked: false
-//                + checked: true
-//                - default: null
-//                + default: [value1, value2]
-//                - id: 45
-//                + id: null
-//                - key1: value1
-//                + key2: value2
-//                  numbers1: [1, 2, 3, 4]
-//                - numbers2: [2, 3, 4, 5]
-//                + numbers2: [22, 33, 44, 55]
-//                - numbers3: [3, 4, 5]
-//                + numbers4: [4, 5, 6]
-//                + obj1: {nestedKey=value, isNested=true}
-//                - setting1: Some value
-//                + setting1: Another value
-//                - setting2: 200
-//                + setting2: 300
-//                - setting3: true
-//                + setting3: none
-//                }""";
-//        String actualResult = Differ.generate(file1, file2, "");
-//        assertEquals(actualResult, expectedResult);
-//    }
-//
 }

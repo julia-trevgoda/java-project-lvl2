@@ -41,7 +41,7 @@ public class App implements Callable<Void> {
      */
     @Override
     public Void call() throws Exception {
-        Differ.generate(file1, file2, format);
+        System.out.println(Differ.generate(file1, file2, format));
         return null;
     }
 
