@@ -16,11 +16,11 @@ public class AppTests {
 //    }
 //    File expectedResultParse1 = Paths.get(pathToFile).toFile();
 
-    public String expectedResultParse1 = "{chars1=[a, b, c], chars2=[d, e, f], "
+    private final String expectedResultParse1 = "{chars1=[a, b, c], chars2=[d, e, f], "
             + "checked=false, default=null, id=45, key1=value1, numbers1=[1, 2, 3, 4],"
             + " numbers2=[2, 3, 4, 5], numbers3=[3, 4, 5], setting1=Some value,"
             + " setting2=200, setting3=true}";
-    public String expectedResultParse2 = "{chars1=[a, b, c], chars2=false, checked=true,"
+    private final String expectedResultParse2 = "{chars1=[a, b, c], chars2=false, checked=true,"
             + " default=[value1, value2], id=null, key2=value2, numbers1=[1, 2, 3, 4],"
             + " numbers2=[22, 33, 44, 55], numbers4=[4, 5, 6], obj1={nestedKey=value, isNested=true},"
             + " setting1=Another value, setting2=300, setting3=none}";
