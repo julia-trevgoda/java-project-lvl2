@@ -90,8 +90,8 @@ public class AppTests {
     @Test
     @DisplayName("testDiff: JSON: stylish")
     void testDiffJsonStylish() throws IOException {
-        String file1 = "/Users/jtrevgoda/Hexlet/java-project-lvl2/src/test/resources/testDiffJson1.json";
-        String file2 = "/Users/jtrevgoda/Hexlet/java-project-lvl2/src/test/resources/testDiffJson2.json";
+        String file1 = "src/test/resources/testDiffJson1.json";
+        String file2 = "src/test/resources/testDiffJson2.json";
         String expectedResult = """
                 {
                     chars1: [a, b, c]
