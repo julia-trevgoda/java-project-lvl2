@@ -8,13 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.IOException;
 import java.util.Map;
 
-//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AppTests {
-
-//    public static String getExpectedResultParse1(String pathToFile) throws IOException {
-//        return Files.readString(Paths.get(pathToFile));
-//    }
-//    File expectedResultParse1 = Paths.get(pathToFile).toFile();
 
     private final String expectedResultParse1 = "{chars1=[a, b, c], chars2=[d, e, f], "
             + "checked=false, default=null, id=45, key1=value1, numbers1=[1, 2, 3, 4],"
