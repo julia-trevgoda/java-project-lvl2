@@ -16,7 +16,6 @@ public class Parser {
     public static Map<String, Object> parseJson(String pathToFile) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         File file = Paths.get(pathToFile).toFile();
-        System.out.println(file);
         if (file.length() == 0) {
             return new HashMap<>();
         } else {
