@@ -11,7 +11,10 @@ import java.util.concurrent.Callable;
         description = "Compares two configuration files and shows a difference."
 )
 
-public class App implements Callable<Void> {
+public class App implements Callable<Integer> {
+
+    private static final int SUCCESS_EXIT_CODE = 0;
+    private static final int ERROR_EXIT_CODE = 1;
 
     @CommandLine.Option(
             names = {"-f", "--format"},
@@ -37,19 +40,22 @@ public class App implements Callable<Void> {
     /**
      * Diff.generate() method compares 2 files.
      * @return String as a result of comparing
-     * @throws Exception when something goes wrong
      */
     @Override
-    public Void call() throws Exception {
-        System.out.println(Differ.generate(file1, file2, format));
-        return null;
+    public Integer call() {
+        try {
+            String formattedDiff = Differ.generate(file1, file2, format);
+            System.out.println(formattedDiff);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return ERROR_EXIT_CODE;
+        }
+        return SUCCESS_EXIT_CODE;
     }
 
     public static void main(String[] args) {
-        try {
-            new CommandLine(new App()).execute(args);
-        } catch (Throwable throwable) {
-            System.out.println("Error " + throwable);
-        }
+        int exitCode = new CommandLine(new App()).execute(args);
+        System.exit(exitCode);
+
     }
 }
