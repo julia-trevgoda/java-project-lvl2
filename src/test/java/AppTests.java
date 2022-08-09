@@ -10,308 +10,160 @@ import java.util.Map;
 
 public class AppTests {
 
-    private final String expectedResultParse1 = "{chars1=[a, b, c], chars2=[d, e, f], "
-            + "checked=false, default=null, id=45, key1=value1, numbers1=[1, 2, 3, 4],"
-            + " numbers2=[2, 3, 4, 5], numbers3=[3, 4, 5], setting1=Some value,"
-            + " setting2=200, setting3=true}";
-    private final String expectedResultParse2 = "{chars1=[a, b, c], chars2=false, checked=true,"
-            + " default=[value1, value2], id=null, key2=value2, numbers1=[1, 2, 3, 4],"
-            + " numbers2=[22, 33, 44, 55], numbers4=[4, 5, 6], obj1={nestedKey=value, isNested=true},"
-            + " setting1=Another value, setting2=300, setting3=none}";
-
     //Tests on Parser (json, yml, yaml) > returns Map<String, Object>
-
     @Test
     @DisplayName("testParseJson: call JsonParser directly")
     void testParseJson() throws IOException {
-        String file = "src/test/resources/testDiffJson1.json";
-        Map<String, Object> actualResult = Parser.parseJson(file);
-        assertEquals(actualResult.toString(), expectedResultParse1);
+        String data = TestDataFiles.readFile(TestDataFiles.TEST_DIFF_JSON_1);
+        Map<String, Object> actualResult = Parser.parseJson(data);
+        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_PARSE_1);
+        assertEquals(actualResult.toString(), expectedResult);
     }
 
     @Test
     @DisplayName("testParseJson2: call JsonParser through common parse method")
-    void testParseJson2() throws IOException {
-        String file = "src/test/resources/testDiffJson2.json";
-        Map<String, Object> actualResult = Parser.parse(file);
-        assertEquals(actualResult.toString(), expectedResultParse2);
+    void testParseJson2() throws Exception {
+        String data = TestDataFiles.readFile(TestDataFiles.TEST_DIFF_JSON_2);
+        Map<String, Object> actualResult = Parser.parse(data, ".json");
+        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_PARSE_2);
+        assertEquals(actualResult.toString(), expectedResult);
     }
 
     @Test
     @DisplayName("testParseYml: call YmlParser directly")
     void testParseYml() throws IOException {
-        String file = "src/test/resources/testDiffYml1.yml";
-        Map<String, Object> actualResult = Parser.parseYml(file);
-        assertEquals(actualResult.toString(), expectedResultParse1);
+        String data = TestDataFiles.readFile(TestDataFiles.TEST_DIFF_YML_1);
+        Map<String, Object> actualResult = Parser.parseYml(data);
+        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_PARSE_1);
+        assertEquals(actualResult.toString(), expectedResult);
     }
 
     @Test
     @DisplayName("testParseYml2: call YmlParser through common parse method")
-    void testParseYml2() throws IOException {
-        String file = "src/test/resources/testDiffYml2.yml";
-        Map<String, Object> actualResult = Parser.parse(file);
-        assertEquals(actualResult.toString(), expectedResultParse2);
+    void testParseYml2() throws Exception {
+        String data = TestDataFiles.readFile(TestDataFiles.TEST_DIFF_YML_2);
+        Map<String, Object> actualResult = Parser.parse(data, ".yml");
+        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_PARSE_2);
+        assertEquals(actualResult.toString(), expectedResult);
     }
 
     @Test
     @DisplayName("testParseYaml: call YamlParser directly")
     void testParseYaml() throws IOException {
-        String file = "src/test/resources/testDiffYaml1.yaml";
-        Map<String, Object> actualResult = Parser.parseYml(file);
-        assertEquals(actualResult.toString(), expectedResultParse1);
+        String data = TestDataFiles.readFile(TestDataFiles.TEST_DIFF_YAML_1);
+        Map<String, Object> actualResult = Parser.parseYml(data);
+        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_PARSE_1);
+        assertEquals(actualResult.toString(), expectedResult);
     }
 
     @Test
     @DisplayName("testParseYaml: call YamlParser through common parse method")
-    void testParseYaml2() throws IOException {
-        String file = "src/test/resources/testDiffYaml2.yaml";
-        Map<String, Object> actualResult = Parser.parse(file);
-        assertEquals(actualResult.toString(), expectedResultParse2);
-    }
-
-    @Test
-    @DisplayName("test parse file without extension")
-    void testParseFileWithoutExtension() throws IOException {
-        String file = "src/test/resources/testDiffDefault";
-        String expectedResult = "{follow=false, host=hexlet.io, proxy=123.234.53.22, timeout=50}";
-        Map<String, Object> actualResult = Parser.parse(file);
+    void testParseYaml2() throws Exception {
+        String data = TestDataFiles.readFile(TestDataFiles.TEST_DIFF_YAML_2);
+        Map<String, Object> actualResult = Parser.parse(data, ".yaml");
+        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_PARSE_2);
         assertEquals(actualResult.toString(), expectedResult);
     }
 
 
     //Tests on Differ > returns *formatted* String
-
     @Test
     @DisplayName("testDiff: JSON: stylish")
-    void testDiffJsonStylish() throws IOException {
-        String file1 = "src/test/resources/testDiffJson1.json";
-        String file2 = "src/test/resources/testDiffJson2.json";
-        String expectedResult = """
-                {
-                    chars1: [a, b, c]
-                  - chars2: [d, e, f]
-                  + chars2: false
-                  - checked: false
-                  + checked: true
-                  - default: null
-                  + default: [value1, value2]
-                  - id: 45
-                  + id: null
-                  - key1: value1
-                  + key2: value2
-                    numbers1: [1, 2, 3, 4]
-                  - numbers2: [2, 3, 4, 5]
-                  + numbers2: [22, 33, 44, 55]
-                  - numbers3: [3, 4, 5]
-                  + numbers4: [4, 5, 6]
-                  + obj1: {nestedKey=value, isNested=true}
-                  - setting1: Some value
-                  + setting1: Another value
-                  - setting2: 200
-                  + setting2: 300
-                  - setting3: true
-                  + setting3: none
-                }""";
-        String actualResult = Differ.generate(file1, file2, "stylish");
+    void testDiffJsonStylish() throws Exception {
+        String filePath1 = TestDataFiles.TEST_DIFF_JSON_1;
+        String filePath2 = TestDataFiles.TEST_DIFF_JSON_2;
+        String actualResult = Differ.generate(filePath1, filePath2, "stylish");
+        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_DIFF_STYLISH);
         assertEquals(actualResult, expectedResult);
     }
 
     @Test
     @DisplayName("testDiff: JSON: default")
-    void testDiffJsonDefault() throws IOException {
-        String file1 = "src/test/resources/testDiffJson1.json";
-        String file2 = "src/test/resources/testDiffJson2.json";
-        String expectedResult = """
-                {
-                    chars1: [a, b, c]
-                  - chars2: [d, e, f]
-                  + chars2: false
-                  - checked: false
-                  + checked: true
-                  - default: null
-                  + default: [value1, value2]
-                  - id: 45
-                  + id: null
-                  - key1: value1
-                  + key2: value2
-                    numbers1: [1, 2, 3, 4]
-                  - numbers2: [2, 3, 4, 5]
-                  + numbers2: [22, 33, 44, 55]
-                  - numbers3: [3, 4, 5]
-                  + numbers4: [4, 5, 6]
-                  + obj1: {nestedKey=value, isNested=true}
-                  - setting1: Some value
-                  + setting1: Another value
-                  - setting2: 200
-                  + setting2: 300
-                  - setting3: true
-                  + setting3: none
-                }""";
-        String actualResult = Differ.generate(file1, file2);
+    void testDiffJsonDefault() throws Exception {
+        String filePath1 = TestDataFiles.TEST_DIFF_JSON_1;
+        String filePath2 = TestDataFiles.TEST_DIFF_JSON_2;
+        String actualResult = Differ.generate(filePath1, filePath2);
+        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_DIFF_STYLISH);
         assertEquals(actualResult, expectedResult);
     }
 
     @Test
-    @DisplayName("testDiff: YML: default format")
-    void testDiffYmlDefault() throws IOException {
-        String file1 = "src/test/resources/testDiffYml1.yml";
-        String file2 = "src/test/resources/testDiffYml2.yml";
-        String expectedResult = """
-                {
-                    chars1: [a, b, c]
-                  - chars2: [d, e, f]
-                  + chars2: false
-                  - checked: false
-                  + checked: true
-                  - default: null
-                  + default: [value1, value2]
-                  - id: 45
-                  + id: null
-                  - key1: value1
-                  + key2: value2
-                    numbers1: [1, 2, 3, 4]
-                  - numbers2: [2, 3, 4, 5]
-                  + numbers2: [22, 33, 44, 55]
-                  - numbers3: [3, 4, 5]
-                  + numbers4: [4, 5, 6]
-                  + obj1: {nestedKey=value, isNested=true}
-                  - setting1: Some value
-                  + setting1: Another value
-                  - setting2: 200
-                  + setting2: 300
-                  - setting3: true
-                  + setting3: none
-                }""";
-        String actualResult = Differ.generate(file1, file2, "");
+    @DisplayName("testDiff: YML: default")
+    void testDiffYmlDefault() throws Exception {
+        String filePath1 = TestDataFiles.TEST_DIFF_YML_1;
+        String filePath2 = TestDataFiles.TEST_DIFF_YML_2;
+        String actualResult = Differ.generate(filePath1, filePath2);
+        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_DIFF_STYLISH);
+        assertEquals(actualResult, expectedResult);
+    }
+
+    @Test
+    @DisplayName("testDiff: YAML: Stylish")
+    void testDiffYamlStylish() throws Exception {
+        String filePath1 = TestDataFiles.TEST_DIFF_YAML_1;
+        String filePath2 = TestDataFiles.TEST_DIFF_YAML_2;
+        String actualResult = Differ.generate(filePath1, filePath2, "stylish");
+        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_DIFF_STYLISH);
         assertEquals(actualResult, expectedResult);
     }
 
     @Test
     @DisplayName("testDiff: JSON: plain")
-    void testDiffJsonPlain() throws IOException {
-        String file1 = "src/test/resources/testDiffJson1.json";
-        String file2 = "src/test/resources/testDiffJson2.json";
-        String expectedResult = """
-                Property 'chars2' was updated. From [complex value] to false
-                Property 'checked' was updated. From false to true
-                Property 'default' was updated. From null to [complex value]
-                Property 'id' was updated. From 45 to null
-                Property 'key1' was removed
-                Property 'key2' was added with value: 'value2'
-                Property 'numbers2' was updated. From [complex value] to [complex value]
-                Property 'numbers3' was removed
-                Property 'numbers4' was added with value: [complex value]
-                Property 'obj1' was added with value: [complex value]
-                Property 'setting1' was updated. From 'Some value' to 'Another value'
-                Property 'setting2' was updated. From 200 to 300
-                Property 'setting3' was updated. From true to 'none'""";
-        String actualResult = Differ.generate(file1, file2, "plain");
+    void testDiffJsonPlain() throws Exception {
+        String filePath1 = TestDataFiles.TEST_DIFF_JSON_1;
+        String filePath2 = TestDataFiles.TEST_DIFF_JSON_2;
+        String actualResult = Differ.generate(filePath1, filePath2, "plain");
+        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_DIFF_PLAIN);
         assertEquals(actualResult, expectedResult);
     }
 
     @Test
     @DisplayName("testDiff: YAML: plain")
-    void testDiffYamlPlain() throws IOException {
-        String file1 = "src/test/resources/testDiffYaml1.yaml";
-        String file2 = "src/test/resources/testDiffYaml2.yaml";
-        String expectedResult = """
-                Property 'chars2' was updated. From [complex value] to false
-                Property 'checked' was updated. From false to true
-                Property 'default' was updated. From null to [complex value]
-                Property 'id' was updated. From 45 to null
-                Property 'key1' was removed
-                Property 'key2' was added with value: 'value2'
-                Property 'numbers2' was updated. From [complex value] to [complex value]
-                Property 'numbers3' was removed
-                Property 'numbers4' was added with value: [complex value]
-                Property 'obj1' was added with value: [complex value]
-                Property 'setting1' was updated. From 'Some value' to 'Another value'
-                Property 'setting2' was updated. From 200 to 300
-                Property 'setting3' was updated. From true to 'none'""";
-        String actualResult = Differ.generate(file1, file2, "plain");
+    void testDiffYamlPlain() throws Exception {
+        String filePath1 = TestDataFiles.TEST_DIFF_YAML_1;
+        String filePath2 = TestDataFiles.TEST_DIFF_YAML_2;
+        String actualResult = Differ.generate(filePath1, filePath2, "plain");
+        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_DIFF_PLAIN);
+        assertEquals(actualResult, expectedResult);
+    }
+
+    @Test
+    @DisplayName("testDiff: YML: plain")
+    void testDiffYmlPlain() throws Exception {
+        String filePath1 = TestDataFiles.TEST_DIFF_YML_1;
+        String filePath2 = TestDataFiles.TEST_DIFF_YML_2;
+        String actualResult = Differ.generate(filePath1, filePath2, "plain");
+        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_DIFF_PLAIN);
         assertEquals(actualResult, expectedResult);
     }
 
     @Test
     @DisplayName("testDiff: JSON: Json")
-    void testDiffJsonToJson() throws IOException {
-        String file1 = "src/test/resources/testDiffJson1.json";
-        String file2 = "src/test/resources/testDiffJson2.json";
-        String expected = "[{\"key\":\"chars1\",\"value\":[\"a\",\"b\",\"c\"],\"param\":\"EQUALS\"},"
-                + "{\"key\":\"chars2\",\"value\":[\"d\",\"e\",\"f\"],\"param\":\"REMOVE_UPDATED\"},"
-                + "{\"key\":\"chars2\",\"value\":false,\"param\":\"ADD_UPDATED\"},"
-                + "{\"key\":\"checked\",\"value\":false,\"param\":\"REMOVE_UPDATED\"},"
-                + "{\"key\":\"checked\",\"value\":true,\"param\":\"ADD_UPDATED\"},"
-                + "{\"key\":\"default\",\"value\":null,\"param\":\"REMOVE_UPDATED\"},"
-                + "{\"key\":\"default\",\"value\":[\"value1\",\"value2\"],\"param\":\"ADD_UPDATED\"},"
-                + "{\"key\":\"id\",\"value\":45,\"param\":\"REMOVE_UPDATED\"},"
-                + "{\"key\":\"id\",\"value\":null,\"param\":\"ADD_UPDATED\"},"
-                + "{\"key\":\"key1\",\"value\":\"value1\",\"param\":\"REMOVE_ONE\"},"
-                + "{\"key\":\"key2\",\"value\":\"value2\",\"param\":\"ADD_ONE\"},"
-                + "{\"key\":\"numbers1\",\"value\":[1,2,3,4],\"param\":\"EQUALS\"},"
-                + "{\"key\":\"numbers2\",\"value\":[2,3,4,5],\"param\":\"REMOVE_UPDATED\"},"
-                + "{\"key\":\"numbers2\",\"value\":[22,33,44,55],\"param\":\"ADD_UPDATED\"},"
-                + "{\"key\":\"numbers3\",\"value\":[3,4,5],\"param\":\"REMOVE_ONE\"},"
-                + "{\"key\":\"numbers4\",\"value\":[4,5,6],\"param\":\"ADD_ONE\"},"
-                + "{\"key\":\"obj1\",\"value\":{\"nestedKey\":\"value\",\"isNested\":true},\"param\":\"ADD_ONE\"},"
-                + "{\"key\":\"setting1\",\"value\":\"Some value\",\"param\":\"REMOVE_UPDATED\"},"
-                + "{\"key\":\"setting1\",\"value\":\"Another value\",\"param\":\"ADD_UPDATED\"},"
-                + "{\"key\":\"setting2\",\"value\":200,\"param\":\"REMOVE_UPDATED\"},"
-                + "{\"key\":\"setting2\",\"value\":300,\"param\":\"ADD_UPDATED\"},"
-                + "{\"key\":\"setting3\",\"value\":true,\"param\":\"REMOVE_UPDATED\"},"
-                + "{\"key\":\"setting3\",\"value\":\"none\",\"param\":\"ADD_UPDATED\"}]";
-        String actual = Differ.generate(file1, file2, "json");
-        assertEquals(actual, expected);
+    void testDiffJsonToJson() throws Exception {
+        String filePath1 = TestDataFiles.TEST_DIFF_JSON_1;
+        String filePath2 = TestDataFiles.TEST_DIFF_JSON_2;
+        String actualResult = Differ.generate(filePath1, filePath2, "json");
+        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_DIFF_JSON);
+        assertEquals(actualResult, expectedResult);
     }
 
     @Test
     @DisplayName("testDiffJson1: file1.size() > file2.size()")
-    void testdiffJson1() throws IOException {
-        String file1 = "src/test/resources/testDiffJson1.json";
-        String file2 = "src/test/resources/testDiffJson2_short.json";
-        String expectedResult = """
-                {
-                  - chars1: [a, b, c]
-                  - chars2: [d, e, f]
-                  - checked: false
-                  - default: null
-                  + default: [value1, value2]
-                  - id: 45
-                  - key1: value1
-                  - numbers1: [1, 2, 3, 4]
-                  - numbers2: [2, 3, 4, 5]
-                  - numbers3: [3, 4, 5]
-                  + obj1: {nestedKey=value, isNested=true}
-                  - setting1: Some value
-                  - setting2: 200
-                  - setting3: true
-                }""";
-        String actualResult = Differ.generate(file1, file2, "");
+    void testdiffJson1() throws Exception {
+        String filePath1 = TestDataFiles.TEST_DIFF_JSON_1;
+        String filePath2 = TestDataFiles.TEST_DIFF_JSON_2_SHORT;
+        String actualResult = Differ.generate(filePath1, filePath2);
+        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_DIFF_STYLISH_2);
         assertEquals(actualResult, expectedResult);
     }
 
     @Test
     @DisplayName("testDiffYaml1: file1.size() < file2.size()")
-    void testdiffYaml1() throws IOException {
-        String file1 = "src/test/resources/testDiffYaml1_short.yaml";
-        String file2 = "src/test/resources/testDiffYaml2.yaml";
-        String expectedResult = """
-                Property 'chars1' was added with value: [complex value]
-                Property 'chars2' was updated. From [complex value] to false
-                Property 'checked' was added with value: true
-                Property 'default' was added with value: [complex value]
-                Property 'id' was added with value: null
-                Property 'key1' was removed
-                Property 'key2' was added with value: 'value2'
-                Property 'numbers1' was added with value: [complex value]
-                Property 'numbers2' was added with value: [complex value]
-                Property 'numbers3' was removed
-                Property 'numbers4' was added with value: [complex value]
-                Property 'obj1' was added with value: [complex value]
-                Property 'setting1' was added with value: 'Another value'
-                Property 'setting2' was added with value: 300
-                Property 'setting3' was added with value: 'none'""";
-        String actualResult = Differ.generate(file1, file2, "plain");
+    void testdiffYaml1() throws Exception {
+        String filePath1 = TestDataFiles.TEST_DIFF_YAML_1_SHORT;
+        String filePath2 = TestDataFiles.TEST_DIFF_YAML_2;
+        String actualResult = Differ.generate(filePath1, filePath2, "plain");
+        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_DIFF_PLAIN_2);
         assertEquals(actualResult, expectedResult);
     }
 }
