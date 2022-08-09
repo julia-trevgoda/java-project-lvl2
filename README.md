@@ -7,6 +7,6 @@ Just take two files, run the Differ app and you get the difference in the format
 **Supported file extensions:** .json, .yml, .yaml.\
 **Available output formats:** stylish, plain, JSON.
 
-**Demo:**
+**Demo:**\
 [![asciicast](https://asciinema.org/a/THcIkyU97Sluitxxm2kfthq4b.svg)](https://asciinema.org/a/THcIkyU97Sluitxxm2kfthq4b)
 
