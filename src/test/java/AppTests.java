@@ -1,3 +1,5 @@
+import com.ginsberg.junit.exit.ExpectSystemExitWithStatus;
+import hexlet.code.App;
 import hexlet.code.Differ;
 import hexlet.code.Parser;
 import org.junit.jupiter.api.DisplayName;
@@ -166,4 +168,18 @@ public class AppTests {
         String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_DIFF_PLAIN_2);
         assertEquals(actualResult, expectedResult);
     }
+
+    //Test exit codes
+    @Test
+    @ExpectSystemExitWithStatus(0)
+    void testSuccessExitCode1() {
+        App.main(new String[]{TestDataFiles.TEST_DIFF_JSON_1, TestDataFiles.TEST_DIFF_JSON_2});
+    }
+
+    @Test
+    @ExpectSystemExitWithStatus(1)
+    void testErrorExitCode() {
+        App.main(new String[]{TestDataFiles.TEST_DIFF_JSON_1, "testDiffJson2.json"});
+    }
+
 }

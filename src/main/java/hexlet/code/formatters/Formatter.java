@@ -15,7 +15,7 @@ public class Formatter {
             case "stylish" -> formatStylish(diff);
             case "plain" -> formatPlain(diff);
             case "json" -> formatJson(diff);
-            default -> throw new Exception("Error: Wrong " + format);
+            default -> throw new Exception("Error: Wrong format: " + format);
         };
     }
 }
