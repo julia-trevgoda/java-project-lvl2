@@ -28,14 +28,14 @@ public class App implements Callable<Integer> {
             paramLabel = "filepath1",
             description = "path to first file"
     )
-    private String file1;
+    private String filePath1;
 
     @CommandLine.Parameters(
             index = "1",
             paramLabel = "filepath2",
             description = "path to second file"
     )
-    private String file2;
+    private String filePath2;
 
     /**
      * Diff.generate() method compares 2 files.
@@ -44,7 +44,7 @@ public class App implements Callable<Integer> {
     @Override
     public Integer call() {
         try {
-            String formattedDiff = Differ.generate(file1, file2, format);
+            String formattedDiff = Differ.generate(filePath1, filePath2, format);
             System.out.println(formattedDiff);
         } catch (Exception e) {
             System.err.println(e.getMessage());

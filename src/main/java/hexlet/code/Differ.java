@@ -1,68 +1,29 @@
 package hexlet.code;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
-import static hexlet.code.Formatter.formatDiff;
-import static hexlet.code.Parser.parse;
+import static hexlet.code.formatters.Formatter.formatDiff;
 
 public class Differ {
 
-    public static String generate(String file1, String file2, String format) throws IOException {
+    public static Map<String, Object> getFileContent(String pathToFile) throws Exception {
+        String data = Files.readString(Paths.get(pathToFile).toAbsolutePath());
+        String type = pathToFile.contains(".") ? pathToFile.substring(pathToFile.lastIndexOf(".")) : "";
+        return Parser.parse(data, type);
+    }
 
-        Map<String, Object> data1 = parse(file1);
-        Map<String, Object> data2 = parse(file2);
+    public static String generate(String filePath1, String filePath2, String format) throws Exception {
 
-        List<DiffElement> diff = new ArrayList<>();
-
-        int iter1 = 0;
-        int iter2 = 0;
-
-        List<String> keys1 = data1.keySet().stream().toList();
-        List<String> keys2 = data2.keySet().stream().toList();
-
-        while (iter1 < data1.size() && iter2 < data2.size()) {
-
-            String key1 = keys1.get(iter1);
-            String key2 = keys2.get(iter2);
-
-            if (key1.equals(key2)) {
-                if ((data1.get(key1) != null && data2.get(key2) != null) && data1.get(key1).equals(data2.get(key2))) {
-                    diff.add(new DiffElement(key1, data1.get(key1), DiffElement.DiffType.EQUALS));
-                } else {
-                    diff.add(new DiffElement(key1, data1.get(key1), DiffElement.DiffType.REMOVE_UPDATED));
-                    diff.add(new DiffElement(key2, data2.get(key2), DiffElement.DiffType.ADD_UPDATED));
-                }
-                iter1++;
-                iter2++;
-            } else if (key1.compareTo(key2) < 0) {
-                diff.add(new DiffElement(key1, data1.get(key1), DiffElement.DiffType.REMOVE_ONE));
-                iter1++;
-            } else {
-                diff.add(new DiffElement(key2, data2.get(key2), DiffElement.DiffType.ADD_ONE));
-                iter2++;
-            }
-
-        }
-
-        while (iter1 < data1.size()) {
-            diff.add(new DiffElement(keys1.get(iter1), data1.get(keys1.get(iter1)),
-                    DiffElement.DiffType.REMOVE_ONE));
-            iter1++;
-        }
-
-        while (iter2 < data2.size()) {
-            diff.add(new DiffElement(keys2.get(iter2), data2.get(keys2.get(iter2)),
-                    DiffElement.DiffType.ADD_ONE));
-            iter2++;
-        }
-
+        Map<String, Object> data1 = getFileContent(filePath1);
+        Map<String, Object> data2 = getFileContent(filePath2);
+        List<DiffElement> diff = Comparator.getComparison(data1, data2);
         return formatDiff(format, diff);
     }
 
-    public static String generate(String file1, String file2) throws IOException {
-        return generate(file1, file2, "");
+    public static String generate(String filePath1, String filePath2) throws Exception {
+        return generate(filePath1, filePath2, "stylish");
     }
 }
