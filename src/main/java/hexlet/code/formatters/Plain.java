@@ -34,34 +34,58 @@ public class Plain {
 
     public static String formatPlain(List<DiffElement> diff) {
         StringBuilder output = new StringBuilder();
-        DiffElement diffElement;
 
-        for (int i = 0; i < diff.size(); i++) {
-            diffElement = diff.get(i);
+        for (DiffElement diffElement : diff) {
             DiffElement.DiffType diffElementStatus = diffElement.getParam();
-            if (diffElementStatus == ADDED) {
-                output.append("Property ").append("'")
-                        .append(diffElement.getKey()).append("'")
-                        .append(" was added with value: ")
-                        .append(getPlainValue(diffElement.getValue()));
-            } else if (diffElementStatus == DELETED) {
-                output.append("Property ").append("'")
-                        .append(diffElement.getKey()).append("'")
-                        .append(" was removed");
-            } else if (diffElementStatus == CHANGED) {
-                output.append("Property ").append("'")
-                        .append(diffElement.getKey()).append("'")
-                        .append(" was updated. From ")
-                        .append(getPlainValue(diffElement.getValue())).append(" ")
-                        .append("to ")
-                        .append(getPlainValue(diffElement.getValue2()));
+
+            if (!diffElementStatus.equals(UNCHANGED)) {
+
+                switch (diffElementStatus) {
+                    case ADDED -> output.append("Property ").append("'")
+                            .append(diffElement.getKey()).append("'")
+                            .append(" was added with value: ")
+                            .append(getPlainValue(diffElement.getValue()));
+                    case DELETED -> output.append("Property ").append("'")
+                            .append(diffElement.getKey()).append("'")
+                            .append(" was removed");
+                    case CHANGED -> output.append("Property ").append("'")
+                            .append(diffElement.getKey()).append("'")
+                            .append(" was updated. From ")
+                            .append(getPlainValue(diffElement.getValue())).append(" ")
+                            .append("to ")
+                            .append(getPlainValue(diffElement.getValue2()));
+                    default -> throw new IllegalStateException("Unexpected value: " + diffElementStatus);
+                }
+                if (diff.indexOf(diffElement) != diff.size() - 1
+                        && !output.isEmpty()
+                        && !Objects.equals(output.substring(output.length() - 1), " ")) {
+                    output.append("\n");
+                }
             }
 
-            if (i != diff.size() - 1 && !output.isEmpty()
-                    && !Objects.equals(output.substring(output.length() - 1), " ")
-                    && !diffElementStatus.equals(UNCHANGED)) {
-                output.append("\n");
-            }
+//            if (diffElementStatus == ADDED) {
+//                output.append("Property ").append("'")
+//                        .append(diffElement.getKey()).append("'")
+//                        .append(" was added with value: ")
+//                        .append(getPlainValue(diffElement.getValue()));
+//            } else if (diffElementStatus == DELETED) {
+//                output.append("Property ").append("'")
+//                        .append(diffElement.getKey()).append("'")
+//                        .append(" was removed");
+//            } else if (diffElementStatus == CHANGED) {
+//                output.append("Property ").append("'")
+//                        .append(diffElement.getKey()).append("'")
+//                        .append(" was updated. From ")
+//                        .append(getPlainValue(diffElement.getValue())).append(" ")
+//                        .append("to ")
+//                        .append(getPlainValue(diffElement.getValue2()));
+//            }
+
+//            if (i != diff.size() - 1 && !output.isEmpty()
+//                    && !Objects.equals(output.substring(output.length() - 1), " ")
+//                    && !diffElementStatus.equals(UNCHANGED)) {
+//                output.append("\n");
+//            }
         }
         return output.toString();
     }

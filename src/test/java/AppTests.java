@@ -1,72 +1,12 @@
 import com.ginsberg.junit.exit.ExpectSystemExitWithStatus;
 import hexlet.code.App;
 import hexlet.code.Differ;
-import hexlet.code.Parser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.IOException;
-import java.util.Map;
-
 public class AppTests {
-
-    //Tests on Parser (json, yml, yaml) > returns Map<String, Object>
-    @Test
-    @DisplayName("testParseJson: call JsonParser directly")
-    void testParseJson() throws IOException {
-        String data = TestDataFiles.readFile(TestDataFiles.TEST_DIFF_JSON_1);
-        Map<String, Object> actualResult = Parser.parseJson(data);
-        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_PARSE_1);
-        assertEquals(actualResult.toString(), expectedResult);
-    }
-
-    @Test
-    @DisplayName("testParseJson2: call JsonParser through common parse method")
-    void testParseJson2() throws Exception {
-        String data = TestDataFiles.readFile(TestDataFiles.TEST_DIFF_JSON_2);
-        Map<String, Object> actualResult = Parser.parse(data, ".json");
-        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_PARSE_2);
-        assertEquals(actualResult.toString(), expectedResult);
-    }
-
-    @Test
-    @DisplayName("testParseYml: call YmlParser directly")
-    void testParseYml() throws IOException {
-        String data = TestDataFiles.readFile(TestDataFiles.TEST_DIFF_YML_1);
-        Map<String, Object> actualResult = Parser.parseYml(data);
-        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_PARSE_1);
-        assertEquals(actualResult.toString(), expectedResult);
-    }
-
-    @Test
-    @DisplayName("testParseYml2: call YmlParser through common parse method")
-    void testParseYml2() throws Exception {
-        String data = TestDataFiles.readFile(TestDataFiles.TEST_DIFF_YML_2);
-        Map<String, Object> actualResult = Parser.parse(data, ".yml");
-        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_PARSE_2);
-        assertEquals(actualResult.toString(), expectedResult);
-    }
-
-    @Test
-    @DisplayName("testParseYaml: call YamlParser directly")
-    void testParseYaml() throws IOException {
-        String data = TestDataFiles.readFile(TestDataFiles.TEST_DIFF_YAML_1);
-        Map<String, Object> actualResult = Parser.parseYml(data);
-        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_PARSE_1);
-        assertEquals(actualResult.toString(), expectedResult);
-    }
-
-    @Test
-    @DisplayName("testParseYaml: call YamlParser through common parse method")
-    void testParseYaml2() throws Exception {
-        String data = TestDataFiles.readFile(TestDataFiles.TEST_DIFF_YAML_2);
-        Map<String, Object> actualResult = Parser.parse(data, ".yaml");
-        String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_PARSE_2);
-        assertEquals(actualResult.toString(), expectedResult);
-    }
-
 
     //Tests on Differ > returns *formatted* String
     @Test
@@ -116,7 +56,7 @@ public class AppTests {
         String filePath2 = TestDataFiles.TEST_DIFF_JSON_2;
         String actualResult = Differ.generate(filePath1, filePath2, "plain");
         String expectedResult = TestDataFiles.readFile(TestDataFiles.RESULT_DIFF_PLAIN);
-        assertEquals(actualResult, expectedResult);
+        assertEquals(expectedResult, actualResult);
     }
 
     @Test
