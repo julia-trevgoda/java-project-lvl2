@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Plain.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">hexlet.code.formatters</a> &gt; <span class="el_source">Plain.java</span></div><h1>Plain.java</h1><pre class="source lang-java linenums">package hexlet.code.formatters;
+
+import hexlet.code.DiffElement;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+import static hexlet.code.DiffElement.DiffType.UNCHANGED;
+
+<span class="nc" id="L11">public class Plain {</span>
+
+    public static boolean isValueComplex(Object value) {
+<span class="fc bfc" id="L14" title="All 2 branches covered.">        return value != null</span>
+<span class="pc bpc" id="L15" title="1 of 6 branches missed.">                &amp;&amp; (value.getClass().isArray() || value instanceof Map || value instanceof List);</span>
+    }
+
+    public static Object getPlainValue(Object value) {
+
+        Object plainValue;
+
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        if (isValueComplex(value)) {</span>
+<span class="fc" id="L23">            plainValue = &quot;[complex value]&quot;;</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        } else if (value instanceof String) {</span>
+<span class="fc" id="L25">            plainValue = &quot;'&quot; + value + &quot;'&quot;;</span>
+        } else {
+<span class="fc" id="L27">            plainValue = value;</span>
+        }
+<span class="fc" id="L29">        return plainValue;</span>
+    }
+
+    public static String formatPlain(List&lt;DiffElement&gt; diff) {
+<span class="fc" id="L33">        StringBuilder output = new StringBuilder();</span>
+
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        for (DiffElement diffElement : diff) {</span>
+<span class="fc" id="L36">            DiffElement.DiffType diffElementStatus = diffElement.getParam();</span>
+
+<span class="fc bfc" id="L38" title="All 2 branches covered.">            if (!diffElementStatus.equals(UNCHANGED)) {</span>
+
+<span class="pc bpc" id="L40" title="1 of 4 branches missed.">                switch (diffElementStatus) {</span>
+<span class="fc" id="L41">                    case ADDED -&gt; output.append(&quot;Property &quot;).append(&quot;'&quot;)</span>
+<span class="fc" id="L42">                            .append(diffElement.getKey()).append(&quot;'&quot;)</span>
+<span class="fc" id="L43">                            .append(&quot; was added with value: &quot;)</span>
+<span class="fc" id="L44">                            .append(getPlainValue(diffElement.getValue()));</span>
+<span class="fc" id="L45">                    case DELETED -&gt; output.append(&quot;Property &quot;).append(&quot;'&quot;)</span>
+<span class="fc" id="L46">                            .append(diffElement.getKey()).append(&quot;'&quot;)</span>
+<span class="fc" id="L47">                            .append(&quot; was removed&quot;);</span>
+<span class="fc" id="L48">                    case CHANGED -&gt; output.append(&quot;Property &quot;).append(&quot;'&quot;)</span>
+<span class="fc" id="L49">                            .append(diffElement.getKey()).append(&quot;'&quot;)</span>
+<span class="fc" id="L50">                            .append(&quot; was updated. From &quot;)</span>
+<span class="fc" id="L51">                            .append(getPlainValue(diffElement.getValue())).append(&quot; &quot;)</span>
+<span class="fc" id="L52">                            .append(&quot;to &quot;)</span>
+<span class="fc" id="L53">                            .append(getPlainValue(diffElement.getValue2()));</span>
+<span class="nc" id="L54">                    default -&gt; throw new IllegalStateException(&quot;Unexpected value: &quot; + diffElementStatus);</span>
+                }
+<span class="fc bfc" id="L56" title="All 2 branches covered.">                if (diff.indexOf(diffElement) != diff.size() - 1</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">                        &amp;&amp; !output.isEmpty()</span>
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">                        &amp;&amp; !Objects.equals(output.substring(output.length() - 1), &quot; &quot;)) {</span>
+<span class="fc" id="L59">                    output.append(&quot;\n&quot;);</span>
+                }
+            }
+<span class="fc" id="L62">        }</span>
+<span class="fc" id="L63">        return output.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

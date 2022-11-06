@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="9.2.1">
+<file name="/Users/jtrevgoda/Hexlet/java-project-lvl2/app/src/main/java/hexlet/code/App.java">
+</file>
+<file name="/Users/jtrevgoda/Hexlet/java-project-lvl2/app/src/main/java/hexlet/code/Comparator.java">
+</file>
+<file name="/Users/jtrevgoda/Hexlet/java-project-lvl2/app/src/main/java/hexlet/code/DiffElement.java">
+</file>
+<file name="/Users/jtrevgoda/Hexlet/java-project-lvl2/app/src/main/java/hexlet/code/Differ.java">
+</file>
+<file name="/Users/jtrevgoda/Hexlet/java-project-lvl2/app/src/main/java/hexlet/code/Parser.java">
+</file>
+<file name="/Users/jtrevgoda/Hexlet/java-project-lvl2/app/src/main/java/hexlet/code/formatters/Formatter.java">
+</file>
+<file name="/Users/jtrevgoda/Hexlet/java-project-lvl2/app/src/main/java/hexlet/code/formatters/Json.java">
+</file>
+<file name="/Users/jtrevgoda/Hexlet/java-project-lvl2/app/src/main/java/hexlet/code/formatters/Plain.java">
+</file>
+<file name="/Users/jtrevgoda/Hexlet/java-project-lvl2/app/src/main/java/hexlet/code/formatters/Stylish.java">
+</file>
+</checkstyle>
