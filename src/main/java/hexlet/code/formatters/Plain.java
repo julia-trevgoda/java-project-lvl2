@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static hexlet.code.DiffElement.DiffType.ADDED;
-import static hexlet.code.DiffElement.DiffType.DELETED;
-import static hexlet.code.DiffElement.DiffType.CHANGED;
 import static hexlet.code.DiffElement.DiffType.UNCHANGED;
 
 public class Plain {
@@ -62,30 +59,6 @@ public class Plain {
                     output.append("\n");
                 }
             }
-
-//            if (diffElementStatus == ADDED) {
-//                output.append("Property ").append("'")
-//                        .append(diffElement.getKey()).append("'")
-//                        .append(" was added with value: ")
-//                        .append(getPlainValue(diffElement.getValue()));
-//            } else if (diffElementStatus == DELETED) {
-//                output.append("Property ").append("'")
-//                        .append(diffElement.getKey()).append("'")
-//                        .append(" was removed");
-//            } else if (diffElementStatus == CHANGED) {
-//                output.append("Property ").append("'")
-//                        .append(diffElement.getKey()).append("'")
-//                        .append(" was updated. From ")
-//                        .append(getPlainValue(diffElement.getValue())).append(" ")
-//                        .append("to ")
-//                        .append(getPlainValue(diffElement.getValue2()));
-//            }
-
-//            if (i != diff.size() - 1 && !output.isEmpty()
-//                    && !Objects.equals(output.substring(output.length() - 1), " ")
-//                    && !diffElementStatus.equals(UNCHANGED)) {
-//                output.append("\n");
-//            }
         }
         return output.toString();
     }
