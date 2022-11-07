@@ -1,7 +1,0 @@
-{
-  "default": ["value1", "value2"],
-  "obj1": {
-    "nestedKey": "value",
-    "isNested": true
-  }
-}
