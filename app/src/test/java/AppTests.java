@@ -90,7 +90,7 @@ public class AppTests {
     }
 
     @Test
-    @DisplayName("testDiffJson1: file1.size() > file2.size()")
+    @DisplayName("testDiff: JSON: file1.size() > file2.size()")
     void testdiffJson1() throws Exception {
         String filePath1 = TestDataFiles.TEST_DIFF_JSON_1;
         String filePath2 = TestDataFiles.TEST_DIFF_JSON_2_SHORT;
@@ -100,7 +100,7 @@ public class AppTests {
     }
 
     @Test
-    @DisplayName("testDiffYaml1: file1.size() < file2.size()")
+    @DisplayName("testDiff: YAML: file1.size() < file2.size()")
     void testdiffYaml1() throws Exception {
         String filePath1 = TestDataFiles.TEST_DIFF_YAML_1_SHORT;
         String filePath2 = TestDataFiles.TEST_DIFF_YAML_2;

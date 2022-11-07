@@ -15,8 +15,6 @@ public class TestDataFiles {
     public static final String TEST_DIFF_YML_1 = RES + "testDiffYml1.yml";
     public static final String TEST_DIFF_YML_2 = RES + "testDiffYml2.yml";
 
-    public static final String RESULT_PARSE_1 = RES + "resultParse1.txt";
-    public static final String RESULT_PARSE_2 = RES + "resultParse2.txt";
     public static final String RESULT_DIFF_STYLISH = RES + "resultDiffStylish.txt";
     public static final String RESULT_DIFF_STYLISH_2 = RES + "resultDiffStylish2.txt";
     public static final String RESULT_DIFF_PLAIN = RES + "resultDiffPlain.txt";
