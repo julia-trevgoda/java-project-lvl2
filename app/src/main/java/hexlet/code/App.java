@@ -46,7 +46,7 @@ public class App implements Callable<Integer> {
         try {
             Differ.generate(filePath1, filePath2, format);
         } catch (Exception e) {
-//            System.err.println(e.getMessage());
+            System.err.println(e.getMessage());
             return ERROR_EXIT_CODE;
         }
         return SUCCESS_EXIT_CODE;
